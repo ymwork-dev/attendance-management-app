@@ -1,0 +1,111 @@
+/* 画面全t内の背景 */
+html, body, main {
+    background-color: #f0f0f5;
+}
+
+/* ページ全体レイアウト */
+body {
+    margin: 0;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* メインコンテンツ */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* コンテンツ全体 */
+.container {
+    text-align: center;
+    padding-top: 20vh;
+    flex: 1;
+}
+
+/* 勤務状態表示 */
+.status-tag {
+    display: inline-block;
+    background-color: #dbdbdb;
+    color: #666;
+    padding: 8px 24px;
+    border-radius: 20px;
+    font-size: 1.05em;
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+
+/* 日付表示 */
+.date {
+    font-size: 2.1em;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+}
+
+/* 現在時刻表示 */
+.time {
+    font-size: 7.2em;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 60px;
+    letter-spacing: 2px;
+}
+
+/* ボタン配置エリア */
+.button-area {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.btn-attendance {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    padding: 16px 4px;
+    font-size: 1.25em;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all 0.2s;
+    letter-spacing: 4px;
+    text-decoration: none;
+}
+
+.btn-black {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-black:hover {
+    background-color: #222222;
+}
+
+.btn-white {
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.btn-white:hover {
+    background-color: #ffffff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* 退勤完了メッセージ */
+.attendance-end-message {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #000;
+    margin-top: 20px;
+}

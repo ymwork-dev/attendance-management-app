@@ -1,0 +1,201 @@
+/* Google Fonts読み込み */
+@import url('https://googleapis.com');
+
+/* メイン画面 */
+body .main-content {
+    background-color: #f0f0f5;
+}
+
+/* スタッフ別一覧画面全体 */
+#attendance-list-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+    font-family: 'M PLUS 1p', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+    padding: 0 20px;
+    box-sizing: border-box;
+    font-family: 'M PLUS 1p', sans-serif;
+}
+
+/* 画面タイトル */
+#attendance-list-container h1 {
+    font-size: 24px;
+    font-weight: 900;
+    color: #4b5563;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+}
+
+/* タイトル左の装飾 */
+#attendance-list-container h1::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 32px;
+    background-color: #000000;
+    margin-right: -10px;
+    flex-shrink: 0;
+}
+
+/* 月切替エリア */
+#month-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e5e5;
+    width: 100%;
+    max-width: 1000px;
+    margin: 40px auto 20px auto;
+    box-sizing: border-box;
+}
+
+/* 前月ボタン */
+#month-selector .nav-btn:first-child {
+    text-align: left;
+}
+
+/* 表示中の月 */
+#month-selector .current-month-display {
+    font-size: 22px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: #000000;
+}
+
+#month-selector .calendar-icon {
+    font-size: 24px;
+}
+
+/* 翌月ボタン */
+#month-selector .nav-btn:last-child {
+    text-align: right;
+}
+
+/* 月切替ボタン */
+#month-selector .nav-btn {
+    color: #868a93;
+    font-size: 16px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+#month-selector .nav-btn:hover {
+    color: #4b5563;
+}
+
+/* テーブル全体 */
+.table-wrapper {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    padding: 10px 0;
+    margin-bottom: 24px;
+}
+
+/* スタッフ別一覧テーブル */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+table th,
+table td {
+    padding: 12px 20px;
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+/* テーブル見出し */
+table th {
+    color: #888888;
+    font-weight: 700;
+    border-bottom: 3px solid #f0f2f5;
+}
+
+/* テーブル行 */
+table tbody tr {
+    border-bottom: 3px solid #f0f2f5;
+}
+
+table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* テーブル内容 */
+table td {
+    color: #888888;
+    font-weight: 700;
+}
+
+/* 詳細リンク */
+.detail-link {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.detail-link:hover {
+    text-decoration: underline;
+}
+
+/* csvダウンロードボタンエリア */
+.csv-button-panel {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.csv-download-btn {
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 900;
+    padding: 12px 60px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.csv-download-btn:hover {
+    opacity: 0.8;
+}
+
+/* 成功メッセージ */
+.attendance-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.success-message-wrapper {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.successMessage {
+    color: #16a34a;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0;
+    padding: 10px 14px;
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 20px;
+    white-space: nowrap;
+}

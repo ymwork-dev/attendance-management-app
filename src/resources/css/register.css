@@ -1,0 +1,102 @@
+/* ページ全体 */
+html body {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* 会員登録フォーム全体 */
+html body .register-box {
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 550px;
+    box-shadow: none;
+    border: none;
+    box-sizing: border-box;
+    padding: 0 20px;
+}
+
+/* タイトル */
+.register-box h1 {
+    margin-top: 0;
+    margin-bottom: 40px;
+    font-size: 1.8em;
+    color: #000000;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* 入力項目 */
+.register-box .form-group {
+    margin-bottom: 30px;
+}
+
+.register-box .form-group label {
+    display: block;
+    margin-bottom: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #000000;
+}
+
+/* 入力欄 */
+.register-box .form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #000000;
+    border-radius: 0px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* 会員登録ボタン */
+html body .register-box .btn {
+    width: 100%;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 16px;
+    border-radius: 0px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+body .register-box .btn:hover {
+    opacity: 0.8;
+}
+
+/* 入力エラーメッセージ　*/
+.register-box .error-message {
+    color: red;
+    font-size: 0.85em;
+    margin-top: 5px;
+}
+
+/* ログイン画面案内 */
+.register-box p {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.95em;
+}
+
+/* ログイン画面リンク */
+.register-box p a {
+    color: #4a90e2;
+    text-decoration: none;
+}
+
+.register-box p a:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}

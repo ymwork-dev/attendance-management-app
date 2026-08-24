@@ -1,0 +1,151 @@
+/* Google Fonts読み込み */
+@import url('https://googleapis.com');
+
+/* 画面全体 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'M PLUS 1p', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif; /* 使用するFontsを指定 */
+    font-weight: 700;
+
+}
+
+/* 申請一覧画面全体 */
+.requestListMain {
+    width: 100%;
+    min-height: calc(100vh - 70px);
+    box-sizing: border-box;
+    background-color: #f0f0f5;
+}
+
+/* 申請一覧の中身だけを中央に寄せる設定 */
+.requestListMain > * {
+    max-width: 1000px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 申請一覧フォーム */
+.requestListForm {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* 申請一覧エリア */
+.request-management {
+    padding-top: 40px;
+    padding-bottom: 60px;
+}
+
+/* タイトル */
+.page-title {
+    font-size: 26px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    letter-spacing: 2px;
+}
+
+.page-title::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 28px;
+    background-color: #000000;
+    margin-right: 16px;
+}
+
+/* タブ切り替え */
+.tab-navigation {
+    display: flex;
+    gap: 80px;
+    border-bottom: 1px solid #000000;
+    margin-bottom: 40px;
+    padding-bottom: 12px;
+}
+
+.tab-item {
+    font-size: 16px;
+    font-weight: bold;
+    color: #888888;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tab-item.is-active {
+    color: #000000;
+}
+
+/* テーブル全体 */
+.table-wrapper {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    padding: 0;
+}
+
+.table-request {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+/* テーブル共通 */
+.table-request th,
+.table-request td {
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+/* テーブル見出し */
+.table-request th {
+    color: #888888;
+    font-weight: 700;
+    border-bottom: 2px solid #f0f2f5;
+    padding: 12px 10px;
+}
+
+/* テーブル内容 */
+.table-request tbody td {
+    color: #888888;
+    border-bottom: 2px solid #f0f2f5;
+    padding: 12px 10px;
+}
+
+.table-request th:first-child,
+.table-request td:first-child {
+    padding-left: 140px;
+}
+
+.table-request th:last-child,
+.table-request td:last-child {
+    padding-right: 140px;
+}
+
+/* 詳細リンク */
+.button-link {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.button-link:hover {
+    text-decoration: underline;
+}
+
+.success-message {
+    color: #16a34a;
+    font-size: 20px;
+    margin-left: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 14px;
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 20px;
+}

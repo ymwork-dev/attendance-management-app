@@ -1,0 +1,79 @@
+/* 全要素の初期設定 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 画面全体 */
+body {
+    background-color: #f0f0f5;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #000000;
+}
+
+/* ヘッダー */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    padding: 0 40px;
+    background-color: #000000;
+}
+
+/* ロゴ */
+.header__logo {
+    display: flex;
+    align-items: center;
+}
+
+.header__logo img {
+    height: auto;
+    max-height: 40px;
+    width: auto;
+    display: block;
+}
+
+/* ナビゲーション */
+.header__nav {
+    display: block;
+}
+
+.header__nav-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 60px;
+}
+
+.header__nav-item {
+    display: block;
+}
+
+.header__nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.header__nav-link:hover {
+    opacity: 0.8;
+}
+
+/* メイン画面 */
+.main-content {
+    display: block;
+    width: 100%;
+    min-height: calc(100vh - 70px);
+    padding-top: 70px;
+    background-color: #f0f0f5;
+}
+
+.main-content > * {
+    margin-left: auto;
+    margin-right: auto;
+}

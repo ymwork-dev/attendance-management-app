@@ -1,0 +1,86 @@
+/* ページ全体レイアウト */
+html body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* メインコンテナを中央付近に配置 */
+.container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 25vh 20px 20px 20px;
+    box-sizing: border-box;
+}
+
+/* メール認証画面のコンテンツ全体 */
+.verify-box {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+/* 認証案内メッセージ */
+.message {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #000;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+/* メール認証ボタン */
+.btn-verify {
+    background-color: #d9d9d9;
+    color: #000;
+    border: 1px solid #999;
+    padding: 14px 50px;
+    border-radius: 6px;
+    font-size: 1.05em;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-verify:hover {
+    background-color: #ccc;
+}
+
+/* 再送完了メッセージ */
+.alert-success {
+    color: green;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* 認証メール再送リンク */
+.resend-link {
+    background: none;
+    border: none;
+    color: #4a90e2;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 0.95em;
+    margin-top: 40px;
+    display: inline-block;
+}
+
+.resend-link:hover {
+    text-decoration: underline;
+}
+
+/* メイン要素画面いっぱいに広げる */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}

@@ -1,0 +1,192 @@
+/* Google Fonts読み込み */
+@import url('https://googleapis.com');
+
+/* 修正申請承認画面全体 */
+.attendanceDetailMain {
+    width: 100%;
+    font-family: 'M PLUS 1p', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif; /* 使用するFontsを指定 */
+    padding: 60px 0;
+    box-sizing: border-box;
+    background-color: #f0f0f5;
+}
+
+.attendanceDetailForm {
+    width: 55%;
+    max-width: 1450px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* タイトル */
+.attendanceDetailTitle {
+    font-size: 26px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    letter-spacing: 2px;
+    color: #333333;
+}
+
+/* タイトル左の装飾 */
+.attendanceDetailTitle::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 28px;
+    background-color: #000000;
+    margin-right: 0px;
+}
+
+/* 修正申請テーブル */
+.attendanceTable {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    border-collapse: collapse;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.attendanceTable tr {
+    border-bottom: 1px solid #f0f2f5;
+}
+
+.attendanceTable tr:last-child {
+    border-bottom: none;
+}
+
+.attendanceTable th,
+.attendanceTable td {
+    padding: 24px 40px;
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+/* テーブル見出し */
+.attendanceTable th {
+    width: 30%;
+    color: #888888;
+    font-weight: 700;
+    text-align: left;
+}
+
+/* テーブル内容 */
+.attendanceTable td {
+    width: 70%;
+    color: #333333;
+    font-weight: 700;
+    text-align: left;
+}
+
+/* 日付表示 */
+.dateDisplayGroup {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.dateYearText {
+    margin-right: 80px;
+}
+
+.dateDayText {
+    margin-left: 90px;
+}
+
+/* 時刻表示 */
+.timeRangeGroup {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+/* 時刻入力欄 */
+.inputTimeField {
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    color: #333333;
+    background-color: transparent;
+    padding: 0;
+    width: auto;
+    height: auto;
+    font-family: inherit;
+}
+
+.inputTimeField[readonly] {
+    background-color: transparent;
+    outline: none;
+    pointer-events: none;
+}
+
+/* 時刻入力アイコン非表示 */
+.inputTimeField::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+/* ～時刻の区切り文字 */
+.timeSeparator {
+    color: #333333;
+    font-size: 15px;
+}
+
+/* 備考入力欄 */
+.textareaRemarksField {
+    width: 100%;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    color: #333333;
+    background-color: transparent;
+    padding: 0;
+    height: auto;
+    resize: none;
+    font-family: inherit;
+}
+
+.textareaRemarksField[readonly] {
+    background-color: transparent;
+    outline: none;
+}
+
+/* ボタンエリア */
+.formActionsPanel {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.submitUpdateButton {
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 12px 48px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* 承認待ちメッセージエリア */
+.approvalPendingOutside {
+    display: flex;
+    justify-content: flex-end;
+    width: 55%;
+    max-width: 1450px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.approvalPendingMessage {
+    background-color: #aaaaaa;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 12px 36px;
+    border-radius: 4px;
+    margin: 0;
+    text-align: center;
+}

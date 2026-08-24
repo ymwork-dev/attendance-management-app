@@ -1,0 +1,176 @@
+/* Google Fonts読み込み */
+@import url('https://googleapis.com');
+
+/* 勤怠一覧画面全体 */
+.attendance-list-container {
+    width: 80%;
+    padding: 40px 0;
+    box-sizing: border-box;
+    font-family: 'M PLUS 1p', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif; /* 使用するFontsを指定 */
+}
+
+/* タイトル */
+.attendance-list-container h1 {
+    width: 70%;
+    max-width: 1000px;
+    min-width: 800px;
+    margin: 0 auto 30px auto;
+    font-size: 24px;
+    font-weight: 900;
+    border-left: 8px solid #4b5563;
+    padding-left: 12px;
+    letter-spacing: 0.05em;
+    color: #333333;
+    box-sizing: border-box;
+}
+
+/* 日付切替エリア */
+.date-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 12px 60px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e5e5;
+    width: 70%;
+    max-width: 1000px;
+    min-width: 800px;
+    margin: 0 auto 20px auto;
+    box-sizing: border-box;
+}
+
+/* 日付切替ボタン */
+.date-selector .nav-btn:first-child {
+    flex: 1;
+    text-align: left;
+}
+
+.date-selector .current-date-display {
+    flex: 1;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #333333;
+}
+
+.date-selector .nav-btn:last-child {
+    flex: 1;
+    text-align: right;
+}
+
+.date-selector .nav-btn {
+    color: #9ca3af;
+    font-size: 16px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.date-selector .nav-btn:hover {
+    color: #4b5563;
+}
+
+/* 勤怠一覧リスト */
+.table-wrapper {
+    width: 70%;
+    max-width: 1000px;
+    min-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+}
+
+.table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.table-wrapper th,
+.table-wrapper td {
+    font-size: 16px;
+    font-weight: 800;
+    padding: 12px 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-wrapper th {
+    color: #9ca3af;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+.table-wrapper td {
+    border-bottom: 1px solid #e5e5e5;
+    color: #9ca3af;
+}
+
+/* テーブルの各列幅 */
+.table-wrapper th:nth-child(1),
+.table-wrapper td:nth-child(1) {
+    width: 22%;
+    text-align: left;
+    padding-left: 60px;
+}
+.table-wrapper th:nth-child(2),
+.table-wrapper td:nth-child(2) {
+    width: 15%;
+}
+
+.table-wrapper th:nth-child(3),
+.table-wrapper td:nth-child(3) {
+    width: 15%;
+}
+
+.table-wrapper th:nth-child(4),
+.table-wrapper td:nth-child(4) {
+    width: 14%;
+}
+
+.table-wrapper th:nth-child(5),
+.table-wrapper td:nth-child(5) {
+    width: 14%;
+}
+
+.table-wrapper th:nth-child(6),
+.table-wrapper td:nth-child(6) {
+    width: 20%;
+    text-align: right;
+    padding-right: 90px;
+}
+
+.table-wrapper tr:last-child td {
+    border-bottom: none;
+}
+
+.table-wrapper tr:hover td {
+    background-color: #fafafa;
+}
+
+/* 詳細リンク */
+.table-wrapper .detail-link {
+    color: #333333;
+    font-weight: 900;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.table-wrapper .detail-link:hover {
+    text-decoration: underline;
+}
+
+/* メイン画面背景　*/
+body .main-content {
+    background-color: #f0f0f5;
+}
+

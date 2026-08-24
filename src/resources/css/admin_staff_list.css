@@ -1,0 +1,127 @@
+/* Google Fonts読み込み */
+@import url('https://googleapis.com');
+
+/* メイン画面 */
+body .main-content {
+    background-color: #f0f0f5;
+}
+
+/* 画面全体 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'M PLUS 1p', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif; /* 使用するFontsを指定 */
+    font-weight: 700;
+    background-color: #f6f8fa;
+    color: #333333;
+}
+
+/* スタッフ一覧画面全体 */
+.requestListMain {
+    width: 100%;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+/* スタッフ一覧エリア */
+.requestListForm {
+    width: 80%;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+/* タイトル */
+.page-title {
+    font-size: 26px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    letter-spacing: 2px;
+    color: #333333;
+}
+
+/* タイトル左の装飾 */
+.page-title::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 32px;
+    background-color: #000000;
+    margin-right: 16px;
+}
+
+/* テーブル全体 */
+.table-wrapper {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    padding: 10px 0;
+}
+
+/* スタッフ一覧テーブル */
+.table-request {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-request th,
+.table-request td {
+    padding: 12px 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* テーブル見出し */
+.table-request th {
+    color: #888888;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 3px solid #f0f2f5;
+}
+
+/* テーブル行 */
+.table-request tbody tr {
+    border-bottom: 3px solid #f0f2f5;
+}
+
+.table-request tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* テーブル内容 */
+.table-request td {
+    color: #888888;
+    font-weight: 700;
+}
+
+.table-request th:first-child,
+.table-request td:first-child {
+    text-align: center;
+    width: 40%;
+}
+
+.table-request th:nth-child(2),
+.table-request td:nth-child(2) {
+    text-align: center;
+    width: 20%;
+}
+
+.table-request th:last-child,
+.table-request td:last-child {
+    text-align: center;
+    width: 40%;
+}
+
+/* 詳細リンク */
+.button-link {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.button-link:hover {
+    text-decoration: underline;
+}
+
