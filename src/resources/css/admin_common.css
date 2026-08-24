@@ -24,9 +24,11 @@ body {
 }
 
 /* ロゴ */
-.header__logo {
-    display: flex;
-    align-items: center;
+.header__logo-text {
+    font-size: 36px;
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: 1px;
 }
 
 .header__logo img {

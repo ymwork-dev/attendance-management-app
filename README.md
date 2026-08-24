@@ -1,6 +1,6 @@
-# coachtech-attendance
+# attendance-APP
 
-このリポジトリは、laravelを使用した 実践学習ターム模擬案件中級＿勤怠管理アプリです。
+このリポジトリは、laravelを使用した 勤怠管理アプリです。
 
 ## 使用技術
 
@@ -69,7 +69,7 @@ erDiagram
 
 ## 開発環境URL
 
-- http://localhost/
+- http://localhost:8083/
 - phpMyAdmin：http://localhost:8080/
 - メール確認URL (Mailhog): http://localhost:8025/
 
@@ -101,13 +101,13 @@ erDiagram
 1. **リポジトリをクローン**
 
     ```bash
-    git clone git@github.com:ymwork-dev/coachtech-attendance.git
+    git clone git@github.com:ymwork-dev/attendance-management-app.git
     ```
 
 2. **プロジェクトディレクトリへ移動**
 
     ```bash
-    cd coachtech-attendance/src
+    cd attendance-management-app/src
     ```
 
 3. **.env ファイルの作成**
@@ -120,9 +120,9 @@ erDiagram
 
     ```bash
     DB_CONNECTION=mysql
-    DB_HOST=db
+    DB_HOST=attendance-db
     DB_PORT=3306
-    DB_DATABASE=coachtech_attendance
+    DB_DATABASE=attendance_db
     DB_USERNAME=root
     DB_PASSWORD=root_password
     ```

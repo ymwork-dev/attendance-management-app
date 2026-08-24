@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
 
-    @yield('title') - coachtech</title>
+    @yield('title') - attendance-app</title>
     @vite(['resources/js/app.js', 'resources/css/admin_common.css'])
     @yield('css')
     <link href="https://googleapis.com" rel="stylesheet">
@@ -13,9 +13,10 @@
 </head>
 <body>
     <header class="header">
-        <h1 class="header__logo">
-            <img src="{{ asset('img/logo.png') }}" alt="COACHTECH">
-        </h1>
+        <!-- ATTENDANCE-APP ロゴ -->
+            <div class="logo">
+                <span class="header__logo-text">ATTENDANCE-APP</span>
+            </div>
 
         <!-- 管理者としてログインしている場合のみヘッダーナビを表示 -->
         @if(Auth::check())

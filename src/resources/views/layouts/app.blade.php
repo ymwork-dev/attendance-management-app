@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- ブラウザのタブにタイトルを表示する -->
-    <title>@yield('title', 'COACHTECH')</title>
+    <title>@yield('title', 'ATTENDANCE-APP')</title>
     <!-- 対応CSSを読み込む Vite(高速なフロントエンド構築ツール) -->
     @vite(['resources/css/app.css'])
     <!-- 親が子を読み込む場所-->
@@ -16,9 +16,9 @@
     <header class="header">
         <!-- ヘッダーの内側 -->
         <div class="header-inner">
-            <!-- COACHTECH ロゴを 画像で挿入 -->
+            <!-- ATTENDANCE-APP ロゴ -->
             <div class="logo">
-                <img src="{{ asset('img/logo.png') }}" alt="COACHTECH">
+                ATTENDANCE-APP
             </div>
             <!-- ログインユーザー用のヘッダーに表示 -->
             @auth
