@@ -80,7 +80,6 @@ body .login-box .btn:hover {
     color: var(--danger);
     font-size: 0.85em;
     margin-top: 5px;
-    text-align: center;
 }
 
 /* 新規登録案内 */
