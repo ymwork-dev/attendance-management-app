@@ -1,105 +1,104 @@
 /* Google Fonts読み込み */
-@import url('https://googleapis.com');
 
 /* レポート画面全体 */
 .report-wrapper {
     max-width: 1000px;
-    font-family: 'M PLUS 1p', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif; /* 使用するFontsを指定 */
+    font-family: 'Zen Kaku Gothic New', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
     margin: 0 auto;
-    padding: 30px 20px;
-    font-family: sans-serif;
+    padding: 21px 20px;
     box-sizing: border-box;
 }
 
 /* タイトル */
 .report-title {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
-    margin-bottom: 6px;
-    color: #111827;
+    margin-bottom: 5px;
+    color: var(--ink);
 }
 
 /* レポート説明分 */
 .report-subtitle {
-    color: #666;
-    font-size: 14px;
-    margin-bottom: 10px;
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 9px;
 }
 
 /* レポートの各セッション */
 .report-section {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 /* セッションタイトル */
 .section-title {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
-    margin-bottom: 12px;
-    color: #111827;
+    margin-bottom: 10px;
+    color: var(--ink);
 }
 
 .section-title-with-subtitle {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     margin-bottom: 3px;
-    color: #111827;
+    color: var(--ink);
 }
 
 .section-subtitle {
-    color: #9ca3af;
-    font-size: 11px;
-    margin-bottom: 12px;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 10px;
 }
 
 /* 集計カード配置 */
 .card-container {
     display: flex;
-    gap: 20px;
+    gap: 17px;
 }
 
+/* 一覧画面と同じ、白背景+薄い枠線に統一 */
 .report-card {
     flex: 1;
-    border: 1px solid #e5e7eb;
-    background-color: #f9fafb;
-    padding: 20px;
+    border: 1px solid var(--line);
+    background-color: var(--surface);
+    padding: 16px 17px;
     border-radius: 8px;
     box-shadow: none;
 }
 
 
 .card-label {
-    font-size: 11px;
-    color: #9ca3af;
+    font-size: 12px;
+    color: var(--muted);
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
 
 .card-value {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
-    color: #111827;
+    color: var(--ink);
 }
 
 /* 月別推移テーブル */
 .trend-table {
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid var(--line);
 }
 
 /* テーブルヘッダー */
 .table-header {
     display: flex;
-    padding: 10px 0;
-    font-size: 14px;
+    padding: 8px 0;
+    font-size: 15px;
     font-weight: bold;
-    color: #111827;
+    color: var(--ink);
 }
 
 .table-row {
     display: flex;
-    padding: 12px 0;
-    border-top: 1px solid #e5e7eb;
-    color: #111827;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+    color: var(--ink);
     font-weight: 500;
 }
 

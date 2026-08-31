@@ -27,13 +27,14 @@
             </div>
 
             <div class="tab-navigation">
-                <a href="?tab=pending" class="tab-item {{ request('tab') !== 'approved' ? 'is-active' : '' }}">承認待ち</a>
+                <a href="?tab=pending" class="tab-item {{ request('tab') !== 'approved' && request('tab') !== 'rejected' ? 'is-active' : '' }}">承認待ち</a>
                 <a href="?tab=approved" class="tab-item {{ request('tab') === 'approved' ? 'is-active' : '' }}">承認済み</a>
+                <a href="?tab=rejected" class="tab-item {{ request('tab') === 'rejected' ? 'is-active' : '' }}">却下済み</a>
             </div>
 
             <div class="table-wrapper">
-                <!-- 承認待ち・承認済みのタブ切り替え -->
-                @if(request('tab') !== 'approved')
+                <!-- 承認待ち・承認済み・却下済みのタブ切り替え -->
+                @if(request('tab') !== 'approved' && request('tab') !== 'rejected')
                     <!-- 承認待ちデータが空の場合 -->
                     @if($pendingRequests->isEmpty())
                         <p class="empty-message">承認待ちの申請はありません。</p>
@@ -63,9 +64,9 @@
                                         <td>{{ $request->comment ?? '' }}</td>
                                         <!-- 申請日 -->
                                         <td>{{ $request->created_at->format('Y/m/d') }}</td>
-                                        <!-- 詳細ページへ遷移 -->
+                                        <!-- 申請詳細(読み取り専用)ページへ遷移 -->
                                         <td>
-                                            <a href="{{ route('attendance.detail', $request->attendance_record_id) }}" class="button-link">詳細</a>
+                                            <a href="{{ route('stamp_correction_request.detail', $request->id) }}" class="button-link">詳細</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -107,9 +108,43 @@
                                         <td>{{ $request->comment ?? '' }}</td>
                                         <!-- 申請日 -->
                                         <td>{{ $request->created_at->format('Y/m/d') }}</td>
-                                        <!-- 詳細ページへ遷移 -->
+                                        <!-- 申請詳細(読み取り専用)ページへ遷移 -->
                                         <td>
-                                            <a href="{{ route('attendance.detail', $request->attendance_record_id) }}?from=request" class="button-link">詳細</a>
+                                            <a href="{{ route('stamp_correction_request.detail', $request->id) }}" class="button-link">詳細</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @endif
+                @endif
+
+                <!-- 却下済みタブ選択時に表示 -->
+                @if(request('tab') === 'rejected')
+                    @if($rejectedRequests->isEmpty())
+                        <p class="empty-message">却下済みの申請はありません。</p>
+                    @else
+                        <table class="table-request">
+                            <thead>
+                                <tr>
+                                    <th scope="col">状態</th>
+                                    <th scope="col">名前</th>
+                                    <th scope="col">対象日時</th>
+                                    <th scope="col">申請理由</th>
+                                    <th scope="col">申請日時</th>
+                                    <th scope="col">詳細</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($rejectedRequests as $request)
+                                    <tr>
+                                        <td>却下済み</td>
+                                        <td>{{ $request->user->name ?? ($request->attendanceRecord->user->name ?? '一般ユーザー') }}</td>
+                                        <td>{{ $request->target_date ?? ($request->attendanceRecord->date ?? '') }}</td>
+                                        <td>{{ $request->comment ?? '' }}</td>
+                                        <td>{{ $request->created_at->format('Y/m/d') }}</td>
+                                        <td>
+                                            <a href="{{ route('stamp_correction_request.detail', $request->id) }}" class="button-link">詳細</a>
                                         </td>
                                     </tr>
                                 @endforeach

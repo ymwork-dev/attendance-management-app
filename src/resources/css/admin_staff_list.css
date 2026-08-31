@@ -1,19 +1,18 @@
 /* Google Fonts読み込み */
-@import url('https://googleapis.com');
 
 /* メイン画面 */
 body .main-content {
-    background-color: #f0f0f5;
+    background-color: var(--bg);
 }
 
 /* 画面全体 */
 body {
     margin: 0;
     padding: 0;
-    font-family: 'M PLUS 1p', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif; /* 使用するFontsを指定 */
+    font-family: 'Zen Kaku Gothic New', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif; /* 使用するFontsを指定 */
     font-weight: 700;
-    background-color: #f6f8fa;
-    color: #333333;
+    background-color: var(--bg);
+    color: var(--ink);
 }
 
 /* スタッフ一覧画面全体 */
@@ -32,13 +31,13 @@ body {
 
 /* タイトル */
 .page-title {
-    font-size: 26px;
+    font-size: 29px;
     font-weight: bold;
     display: flex;
     align-items: center;
     margin-bottom: 50px;
     letter-spacing: 2px;
-    color: #333333;
+    color: var(--ink);
 }
 
 /* タイトル左の装飾 */
@@ -47,17 +46,15 @@ body {
     display: inline-block;
     width: 8px;
     height: 32px;
-    background-color: #000000;
+    background-color: var(--accent);
     margin-right: 16px;
 }
 
-/* テーブル全体 */
+/* テーブル全体(箱で囲まず、線だけで区切るシンプルな表にする) */
 .table-wrapper {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-    overflow: hidden;
     padding: 10px 0;
+    background-color: var(--surface);
+    border: 1px solid var(--line);
 }
 
 /* スタッフ一覧テーブル */
@@ -69,21 +66,21 @@ body {
 .table-request th,
 .table-request td {
     padding: 12px 20px;
-    font-size: 14px;
+    font-size: 15px;
     text-align: center;
 }
 
 /* テーブル見出し */
 .table-request th {
-    color: #888888;
+    color: var(--muted);
     font-weight: 700;
     text-align: center;
-    border-bottom: 3px solid #f0f2f5;
+    border-bottom: 1px solid var(--line);
 }
 
 /* テーブル行 */
 .table-request tbody tr {
-    border-bottom: 3px solid #f0f2f5;
+    border-bottom: 1px solid var(--line);
 }
 
 .table-request tbody tr:last-child {
@@ -92,7 +89,7 @@ body {
 
 /* テーブル内容 */
 .table-request td {
-    color: #888888;
+    color: var(--ink);
     font-weight: 700;
 }
 
@@ -116,7 +113,7 @@ body {
 
 /* 詳細リンク */
 .button-link {
-    color: #000000;
+    color: var(--accent);
     font-weight: bold;
     text-decoration: none;
 }

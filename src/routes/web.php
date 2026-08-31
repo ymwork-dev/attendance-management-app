@@ -71,6 +71,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 申請一覧画面を表示するルート
     Route::get('/stamp_correction_request/list', [StampCorrectionRequestController::class, 'index'])->name('attendance_correction_request.index');
 
+    // 申請詳細(読み取り専用の履歴確認)画面を表示するルート
+    Route::get('/stamp_correction_request/detail/{id}', [StampCorrectionRequestController::class, 'show'])->name('stamp_correction_request.detail');
+
     Route::get('/attendance/report', [AttendanceController::class, 'report'])->name('attendance.report');
 
 });
@@ -80,8 +83,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AdminLoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AdminLoginController::class, 'login'])->name('login.submit');
 
-    // 認証が必須な管理者用ルート
-    Route::middleware(['auth'])->group(function () {
+    // 認証が必須、かつ管理者のみアクセス可能な管理者用ルート
+    Route::middleware(['auth', 'admin'])->group(function () {
         // 管理者ログアウト
         Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');
 

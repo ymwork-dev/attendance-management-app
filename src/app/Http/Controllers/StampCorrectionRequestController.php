@@ -49,7 +49,31 @@ class StampCorrectionRequestController extends Controller
             }
         );
 
-        // 承認待ち申請と承認済み申請をビューを渡し、勤怠申請一覧画面を表示
-        return view('stamp_correction_request.list', compact('pendingRequests', 'approvedRequests'));
+        // 却下済みに分類
+        $rejectedRequests = $allRequests->filter(
+            function (StampCorrectionRequest $request): bool {
+                return $request->status === 'rejected';
+            }
+        );
+
+        // 承認待ち・承認済み・却下済み申請をビューへ渡し、勤怠申請一覧画面を表示
+        return view('stamp_correction_request.list', compact('pendingRequests', 'approvedRequests', 'rejectedRequests'));
+    }
+
+    /**
+     * 申請詳細(読み取り専用の履歴確認)画面を表示する
+     *
+     * @param int $id 修正申請のID
+     * @return View 申請詳細画面のビュー
+     */
+    public function show(int $id): View
+    {
+        // ログイン中のユーザー自身の申請データのみ取得(他人の申請は見られないようにする)
+        $requestData = StampCorrectionRequest::where('user_id', Auth::id())
+            ->with('attendanceRecord')
+            ->findOrFail($id);
+
+        // 申請詳細画面へ表示するデータを渡す
+        return view('stamp_correction_request.show', compact('requestData'));
     }
 }

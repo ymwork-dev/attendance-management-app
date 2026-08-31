@@ -7,6 +7,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\AttendanceRecord;
 use App\Models\BreakLog;
+use App\Models\StampCorrectionRequest;
 // 日時取得計算機能
 use Carbon\Carbon;
 // 日本語の関数のためシステムにテストだと認識させる目印を読み込み
@@ -140,6 +141,47 @@ class T13_AdminAttendanceDetailTest extends TestCase
         $response->assertStatus(302);
         $response->assertSessionHasErrors([
             'comment' => '備考を記入してください',
+        ]);
+    }
+
+    #[Test]
+    public function 承認待ちの修正申請がある勤怠は画面を経由せず直接送信しても更新されない(): void
+    {
+        $admin = User::factory()->create(['admin_status' => true]);
+        $user = User::factory()->create();
+
+        // 元々09:00〜18:00で登録されている勤怠データ
+        $attendance = AttendanceRecord::factory()->create([
+            'user_id' => $user->id,
+            'clock_in' => '09:00:00',
+            'clock_out' => '18:00:00',
+            'comment' => '元の備考',
+        ]);
+
+        // この勤怠データに対する、承認待ちの修正申請を作成
+        StampCorrectionRequest::create([
+            'user_id' => $user->id,
+            'attendance_record_id' => $attendance->id,
+            'requested_clock_in' => '10:00:00',
+            'requested_clock_out' => '19:00:00',
+            'status' => 'pending',
+            'comment' => '承認待ちの申請',
+        ]);
+
+        // 画面上はボタンが表示されない状態だが、直接更新リクエストを送信
+        $response = $this->actingAs($admin)->patch(route('admin.attendance.update', $attendance), [
+            'clock_in' => '07:00',
+            'clock_out' => '20:00',
+            'comment' => '不正に上書きしようとした備考',
+        ]);
+
+        // 更新できず、案内メッセージが表示されることを確認
+        $response->assertSessionHas('alert_message', '承認待ちのため修正はできません。');
+
+        // 勤怠データが元の内容のまま変わっていないことを確認
+        $this->assertDatabaseHas('attendance_records', [
+            'id' => $attendance->id,
+            'comment' => '元の備考',
         ]);
     }
 }

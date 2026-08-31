@@ -43,8 +43,7 @@
                 <form action="{{ route('attendance.clock-in') }}" method="POST">
                     <!-- cookie自動送信を悪用した攻撃を防ぐための@csrf(セキュリティトークン) -->
                     @csrf
-                    <!-- ★classを btn-attendance btn-black に変更します -->
-                    <button type="submit" class="btn-attendance btn-black">出勤</button>
+                    <button type="submit" class="btn-attendance btn-primary">出勤</button>
                 </form>
 
             <!-- 退勤してない場合 -->
@@ -55,7 +54,7 @@
                     <form action="{{ route('attendance.break') }}" method="POST">
                         @csrf
                         <!-- 休憩戻ボタン表示し、クリック時に休憩中ルートへデータを送信する -->
-                        <button type="submit" class="btn-attendance btn-white">休憩戻</button>
+                        <button type="submit" class="btn-attendance btn-secondary">休憩戻</button>
                     </form>
                 <!-- 休憩中でない場合 -->
                 @else
@@ -63,14 +62,14 @@
                     <form action="{{ route('attendance.clock-out') }}" method="POST">
                         @csrf
                         <!-- 退勤ボタン表示し、クリック時に退勤ルートへデータを送信する -->
-                        <button type="submit" class="btn-attendance btn-black">退勤</button>
+                        <button type="submit" class="btn-attendance btn-primary">退勤</button>
                     </form>
 
                     <!--休憩ルートへデータを送信する仕組み -->
                     <form action="{{ route('attendance.break') }}" method="POST">
                         @csrf
                         <!-- 休憩入ボタン表示し、クリック時に休憩ルートへデータを送信する -->
-                        <button type="submit" class="btn-attendance btn-white">休憩入</button>
+                        <button type="submit" class="btn-attendance btn-secondary">休憩入</button>
                     </form>
                 @endif
 

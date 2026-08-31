@@ -277,7 +277,6 @@ class AttendanceController extends Controller
             if ($pendingData) {
                 $record->clock_in = Carbon::parse($pendingData->requested_clock_in)->format('H:i');
                 $record->clock_out = $pendingData->requested_clock_out ? Carbon::parse($pendingData->requested_clock_out)->format('H:i') : null;
-                $record->comment = $pendingData->comment;
 
                 // 申請された休憩データを画面表示用に整形
                 if (!empty($pendingData->requested_breaks)) {
@@ -295,11 +294,6 @@ class AttendanceController extends Controller
             }
         }
 
-        // 最新申請の備考を表示
-        if ($correctionRequest && $correctionRequest->comment) {
-            $record->comment = $correctionRequest->comment;
-        }
-
         return view('attendance_detail', compact('record', 'isPending', 'correctionRequest'));
     }
 
@@ -313,8 +307,14 @@ class AttendanceController extends Controller
     public function update(UpdateAttendanceRequest $request, int $id): RedirectResponse
     {
 
-        // 対象の勤怠データを取得
-        $record = AttendanceRecord::findOrFail($id);
+        // 対象の勤怠データを取得(ログイン中のユーザー自身のデータのみ許可)
+        $record = AttendanceRecord::where('user_id', auth()->id())->findOrFail($id);
+
+        // 既に承認待ちの申請がある場合は、新しい申請を作れないようにする
+        $isPending = $record->applications()->where('status', 'pending')->exists();
+        if ($isPending) {
+            return redirect()->back()->with('alert_message', '承認待ちのため修正はできません。');
+        }
 
         // 入力された休憩データを取得
         $breaks = $request->input('breaks', []);

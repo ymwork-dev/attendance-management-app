@@ -1,12 +1,12 @@
-/* 画面全t内の背景 */
+/* 画面全体の背景 */
 html, body, main {
-    background-color: #f0f0f5;
+    background-color: var(--bg);
 }
 
 /* ページ全体レイアウト */
 body {
     margin: 0;
-    font-family: sans-serif;
+    font-family: 'Zen Kaku Gothic New', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -30,8 +30,8 @@ main {
 /* 勤務状態表示 */
 .status-tag {
     display: inline-block;
-    background-color: #dbdbdb;
-    color: #666;
+    background-color: var(--line);
+    color: var(--muted);
     padding: 8px 24px;
     border-radius: 20px;
     font-size: 1.05em;
@@ -42,7 +42,7 @@ main {
 /* 日付表示 */
 .date {
     font-size: 2.1em;
-    color: #333;
+    color: var(--ink);
     font-weight: bold;
     margin-bottom: 25px;
     letter-spacing: 0.5px;
@@ -52,7 +52,7 @@ main {
 .time {
     font-size: 7.2em;
     font-weight: bold;
-    color: #000;
+    color: var(--ink);
     margin-bottom: 60px;
     letter-spacing: 2px;
 }
@@ -80,32 +80,32 @@ main {
     text-decoration: none;
 }
 
-.btn-black {
-    background-color: #000000;
-    color: #ffffff;
+/* 主要ボタン(出勤・退勤) */
+.btn-primary {
+    background-color: var(--ink);
+    color: var(--accent-contrast);
     border: none;
 }
 
-.btn-black:hover {
-    background-color: #222222;
+.btn-primary:hover {
+    opacity: 0.85;
 }
 
-.btn-white {
-    background-color: #ffffff;
-    color: #000000;
-    border: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+/* 補助ボタン(休憩入・休憩戻) */
+.btn-secondary {
+    background-color: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--line);
 }
 
-.btn-white:hover {
-    background-color: #ffffff;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+.btn-secondary:hover {
+    background-color: var(--bg);
 }
 
 /* 退勤完了メッセージ */
 .attendance-end-message {
     font-size: 2.5em;
     font-weight: bold;
-    color: #000;
+    color: var(--ink);
     margin-top: 20px;
 }

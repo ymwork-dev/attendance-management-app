@@ -16,7 +16,12 @@
     <div id="month-selector">
         <a href="{{ route('attendance.list', ['month' => $prevMonth]) }}" class="nav-btn">&larr; 前月</a>
         <span class="current-month-display">
-            <span>📅</span> {{ str_replace(['年', '月'], ['/', ''], $currentMonth) }}
+            <!-- 線画のカレンダーアイコン -->
+            <svg class="cal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3.5" y="5" width="17" height="15" rx="2.5"/>
+                <path d="M8 3v4M16 3v4M3.5 10h17"/>
+            </svg>
+            {{ str_replace(['年', '月'], ['/', ''], $currentMonth) }}
         </span>
         <a href="{{ route('attendance.list', ['month' => $nextMonth]) }}" class="nav-btn">翌月 &rarr;</a>
     </div>

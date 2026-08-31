@@ -1,9 +1,8 @@
 /* Google Fonts読み込み */
-@import url('https://googleapis.com');
 
 /* メイン画面 */
 body .main-content {
-    background-color: #f0f0f5;
+    background-color: var(--bg);
 }
 
 /* スタッフ別一覧画面全体 */
@@ -11,17 +10,16 @@ body .main-content {
     width: 90%;
     max-width: 1000px;
     margin: 40px auto;
-    font-family: 'M PLUS 1p', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+    font-family: 'Zen Kaku Gothic New', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
     padding: 0 20px;
     box-sizing: border-box;
-    font-family: 'M PLUS 1p', sans-serif;
 }
 
 /* 画面タイトル */
 #attendance-list-container h1 {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 900;
-    color: #4b5563;
+    color: var(--ink);
     margin-bottom: 30px;
     display: flex;
     align-items: center;
@@ -33,21 +31,18 @@ body .main-content {
     display: inline-block;
     width: 8px;
     height: 32px;
-    background-color: #000000;
+    background-color: var(--accent);
     margin-right: -10px;
     flex-shrink: 0;
 }
 
-/* 月切替エリア */
+/* 月切替エリア(箱で囲まず、下線だけで区切る) */
 #month-selector {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #ffffff;
-    padding: 12px 24px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e5e5e5;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
     width: 100%;
     max-width: 1000px;
     margin: 40px auto 20px auto;
@@ -61,17 +56,21 @@ body .main-content {
 
 /* 表示中の月 */
 #month-selector .current-month-display {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 900;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    color: #000000;
+    color: var(--ink);
 }
 
-#month-selector .calendar-icon {
-    font-size: 24px;
+/* カレンダーアイコン */
+.cal-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--accent);
+    flex-shrink: 0;
 }
 
 /* 翌月ボタン */
@@ -81,25 +80,23 @@ body .main-content {
 
 /* 月切替ボタン */
 #month-selector .nav-btn {
-    color: #868a93;
-    font-size: 16px;
+    color: var(--muted);
+    font-size: 18px;
     font-weight: 800;
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 #month-selector .nav-btn:hover {
-    color: #4b5563;
+    color: var(--accent);
 }
 
-/* テーブル全体 */
+/* テーブル全体(箱で囲まず、線だけで区切るシンプルな表にする) */
 .table-wrapper {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
     padding: 10px 0;
     margin-bottom: 24px;
+    background-color: var(--surface);
+    border: 1px solid var(--line);
 }
 
 /* スタッフ別一覧テーブル */
@@ -112,20 +109,20 @@ table {
 table th,
 table td {
     padding: 12px 20px;
-    font-size: 15px;
+    font-size: 17px;
     vertical-align: middle;
 }
 
 /* テーブル見出し */
 table th {
-    color: #888888;
+    color: var(--muted);
     font-weight: 700;
-    border-bottom: 3px solid #f0f2f5;
+    border-bottom: 1px solid var(--line);
 }
 
 /* テーブル行 */
 table tbody tr {
-    border-bottom: 3px solid #f0f2f5;
+    border-bottom: 1px solid var(--line);
 }
 
 table tbody tr:last-child {
@@ -134,13 +131,13 @@ table tbody tr:last-child {
 
 /* テーブル内容 */
 table td {
-    color: #888888;
+    color: var(--ink);
     font-weight: 700;
 }
 
 /* 詳細リンク */
 .detail-link {
-    color: #000000;
+    color: var(--accent);
     font-weight: bold;
     text-decoration: none;
 }
@@ -158,9 +155,9 @@ table td {
 }
 
 .csv-download-btn {
-    background-color: #000000;
-    color: #ffffff;
-    font-size: 16px;
+    background-color: var(--accent);
+    color: var(--accent-contrast);
+    font-size: 18px;
     font-weight: 900;
     padding: 12px 60px;
     border: none;
@@ -188,14 +185,14 @@ table td {
 }
 
 .successMessage {
-    color: #16a34a;
-    font-size: 20px;
+    color: var(--success);
+    font-size: 22px;
     font-weight: bold;
     text-align: center;
     margin-bottom: 0;
     padding: 10px 14px;
-    background-color: #f0fdf4;
-    border: 1px solid #bbf7d0;
+    background-color: color-mix(in srgb, var(--success) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--success) 35%, transparent);
     border-radius: 20px;
     white-space: nowrap;
 }

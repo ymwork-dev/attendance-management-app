@@ -199,7 +199,7 @@ class T11_AttendanceUpdateTest extends TestCase
     }
 
     #[Test]
-    public function 各申請の詳細を押下すると勤怠詳細画面に遷移する(): void
+    public function 各申請の詳細を押下すると申請詳細の読み取り専用画面に遷移する(): void
     {
         $user = User::factory()->create();
 
@@ -216,12 +216,67 @@ class T11_AttendanceUpdateTest extends TestCase
         // 申請一覧画面へアクセス
         $response = $this->actingAs($user)->get(route('attendance_correction_request.index'));
 
-        // 正常に表示し、申請一覧画面の詳細ボタンを確認
+        // 正常に表示し、申請一覧画面の詳細ボタンを確認(申請詳細の読み取り専用画面へのリンク)
         $response->assertStatus(200)
-            ->assertSee(route('attendance.detail', $request->attendance_record_id));
-        // 勤怠詳細画面にアクセスし、正常に表示することを確認
+            ->assertSee(route('stamp_correction_request.detail', $request->id));
+        // 申請詳細画面にアクセスし、正常に表示することを確認
         $this->actingAs($user)
-            ->get(route('attendance.detail', $request->attendance_record_id))
-            ->assertStatus(200);
+            ->get(route('stamp_correction_request.detail', $request->id))
+            ->assertStatus(200)
+            ->assertSee('詳細遷移確認用');
+    }
+
+    #[Test]
+    public function 他人の勤怠データには修正申請できない(): void
+    {
+        // 勤怠データの持ち主(自分ではない別ユーザー)
+        $owner = User::factory()->create();
+        $record = AttendanceRecord::factory()->create(['user_id' => $owner->id]);
+
+        // 修正申請を送ろうとする、勤怠データとは無関係の別ユーザー
+        $otherUser = User::factory()->create();
+
+        // 他人の勤怠データのIDを指定して修正申請を送信
+        $response = $this->actingAs($otherUser)->patch(route('attendance.update', $record->id), [
+            'clock_in' => '09:00',
+            'clock_out' => '18:00',
+            'comment' => '不正な修正申請',
+        ]);
+
+        // 自分のデータではないため404になることを確認
+        $response->assertStatus(404);
+
+        // 修正申請データが保存されていないことを確認
+        $this->assertDatabaseMissing('stamp_correction_requests', [
+            'attendance_record_id' => $record->id,
+        ]);
+    }
+
+    #[Test]
+    public function 承認待ちの申請がある勤怠には画面を経由せず直接送信しても新しい申請を追加できない(): void
+    {
+        $user = User::factory()->create();
+        $record = AttendanceRecord::factory()->create(['user_id' => $user->id]);
+
+        // 既に承認待ちの申請が1件ある状態を用意
+        StampCorrectionRequest::create([
+            'user_id' => $user->id,
+            'attendance_record_id' => $record->id,
+            'status' => 'pending',
+            'comment' => '先に出した申請',
+        ]);
+
+        // 画面上はボタンが表示されない状態だが、直接更新リクエストを送信
+        $response = $this->actingAs($user)->patch(route('attendance.update', $record->id), [
+            'clock_in' => '09:00',
+            'clock_out' => '18:00',
+            'comment' => '2件目の申請',
+        ]);
+
+        // 案内メッセージが表示されることを確認
+        $response->assertSessionHas('alert_message', '承認待ちのため修正はできません。');
+
+        // 申請が2件目は作られず、1件のままであることを確認
+        $this->assertDatabaseCount('stamp_correction_requests', 1);
     }
 }

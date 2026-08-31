@@ -1,3 +1,20 @@
+/* アプリ共通フォント(Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap');
+
+/* 共通カラートークン(app.cssと同じ配色をここでも使えるようにする) */
+:root {
+    --bg: #f7f8fa;         /* 画面全体の背景色(白い表面との差が目立たない程度に薄くする) */
+    --surface: #ffffff;    /* カード・テーブルなど部品の背景色 */
+    --ink: #1c2230;        /* 基本の文字色 */
+    --muted: #6d7686;      /* 補助的な文字色(ラベルなど) */
+    --line: #d7dce3;       /* 罫線・区切り線 */
+    --accent: #3d5a80;     /* ボタンやリンクなどのメインカラー */
+    --accent-contrast: #ffffff; /* アクセント色の上に乗せる文字色 */
+    --warning: #b8862e;    /* 承認待ちなど「注意」を表す色 */
+    --success: #3f7a63;    /* 承認済みなど「成功」を表す色 */
+    --danger: #bd4b43;     /* 却下・エラーなど「危険」を表す色 */
+}
+
 /* 全要素の初期設定 */
 * {
     box-sizing: border-box;
@@ -7,12 +24,12 @@
 
 /* 画面全体 */
 body {
-    background-color: #f0f0f5;
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    color: #000000;
+    background-color: var(--bg);
+    font-family: 'Zen Kaku Gothic New', "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    color: var(--ink);
 }
 
-/* ヘッダー */
+/* ヘッダー(色で塗りつぶさず、下線だけで区切る静かな見た目にする) */
 .header {
     display: flex;
     justify-content: space-between;
@@ -20,14 +37,15 @@ body {
     width: 100%;
     height: 70px;
     padding: 0 40px;
-    background-color: #000000;
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--line);
 }
 
 /* ロゴ */
 .header__logo-text {
-    font-size: 36px;
+    font-size: 24px;
     font-weight: bold;
-    color: #ffffff;
+    color: var(--accent);
     letter-spacing: 1px;
 }
 
@@ -55,15 +73,15 @@ body {
 }
 
 .header__nav-link {
-    color: #ffffff;
+    color: var(--muted);
     text-decoration: none;
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: 600;
     cursor: pointer;
 }
 
 .header__nav-link:hover {
-    opacity: 0.8;
+    color: var(--accent);
 }
 
 /* メイン画面 */
@@ -71,8 +89,8 @@ body {
     display: block;
     width: 100%;
     min-height: calc(100vh - 70px);
-    padding-top: 70px;
-    background-color: #f0f0f5;
+    padding-top: 50px;
+    background-color: var(--bg);
 }
 
 .main-content > * {

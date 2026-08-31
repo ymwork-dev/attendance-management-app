@@ -2,8 +2,8 @@
 html body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
-    background-color: #ffffff;
+    font-family: 'Zen Kaku Gothic New', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+    background-color: var(--surface);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -30,16 +30,16 @@ html body {
 .message {
     font-size: 1.1em;
     font-weight: bold;
-    color: #000;
+    color: var(--ink);
     line-height: 1.6;
     margin-bottom: 40px;
 }
 
 /* メール認証ボタン */
 .btn-verify {
-    background-color: #d9d9d9;
-    color: #000;
-    border: 1px solid #999;
+    background-color: var(--ink);
+    color: var(--accent-contrast);
+    border: none;
     padding: 14px 50px;
     border-radius: 6px;
     font-size: 1.05em;
@@ -51,12 +51,12 @@ html body {
 }
 
 .btn-verify:hover {
-    background-color: #ccc;
+    opacity: 0.85;
 }
 
 /* 再送完了メッセージ */
 .alert-success {
-    color: green;
+    color: var(--success);
     margin-bottom: 15px;
     text-align: center;
 }
@@ -65,7 +65,7 @@ html body {
 .resend-link {
     background: none;
     border: none;
-    color: #4a90e2;
+    color: var(--accent);
     text-decoration: none;
     cursor: pointer;
     font-size: 0.95em;

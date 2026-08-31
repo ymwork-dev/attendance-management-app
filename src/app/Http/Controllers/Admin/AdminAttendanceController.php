@@ -100,8 +100,11 @@ class AdminAttendanceController extends Controller
         // 更新対象の勤怠データと休憩データを取得
         $attendance = AttendanceRecord::with('breaks')->findOrFail($id);
 
+        // この勤怠データに紐づく修正申請の中に、承認待ちのものがあるか確認
+        $isPending = $attendance->applications()->where('status', 'pending')->exists();
+
         // 承認待ちの場合、修正不可のメッセージを表示し処理の終了
-        if ($attendance->status === 'pending') {
+        if ($isPending) {
             return redirect()->back()->with('alert_message', '承認待ちのため修正はできません。');
         }
 
@@ -337,12 +340,13 @@ class AdminAttendanceController extends Controller
         // 修正申請データと一緒にスタッフデータと勤怠データを取得
         $allRequests = StampCorrectionRequest::with(['user', 'attendanceRecord'])->get();
 
-        //修正申請データを承認待ちと承認済みに振り分ける
+        //修正申請データを承認待ち・承認済み・却下済みに振り分ける
         $pendingRequests = $allRequests->filter(fn(StampCorrectionRequest $req): bool => $req->status === 'pending')->values();
         $approvedRequests = $allRequests->filter(fn(StampCorrectionRequest $req): bool => $req->status === 'approved')->values();
+        $rejectedRequests = $allRequests->filter(fn(StampCorrectionRequest $req): bool => $req->status === 'rejected')->values();
 
         // 管理者用申請一覧へ表示
-        return view('admin.admin_request_list', compact('pendingRequests', 'approvedRequests'));
+        return view('admin.admin_request_list', compact('pendingRequests', 'approvedRequests', 'rejectedRequests'));
     }
 
     /**
@@ -405,8 +409,17 @@ class AdminAttendanceController extends Controller
             $requestData->update(['status' => 'approved']);
             // 承認完了メッセージをつけて修正申請一覧画面へ戻る
             return redirect()->route('attendance_correction_request.index')->with('success_message', '申請を承認しました。');
-
         }
+
+        // 却下ボタンを押したら、勤怠データは変更せず申請のステータスだけ却下済みにする
+        if ($request->input('action') === 'reject') {
+            $requestData->update(['status' => 'rejected']);
+            // 却下完了メッセージをつけて修正申請一覧画面へ戻る
+            return redirect()->route('attendance_correction_request.index')->with('success_message', '申請を却下しました。');
+        }
+
+        // 承認・却下以外の値が送られてきた場合は、何もせず元の画面に戻す
+        return redirect()->back()->with('alert_message', '不正な操作です。');
     }
 }
 

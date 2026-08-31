@@ -72,16 +72,17 @@
             <!-- 承認待ちの詳細画面 -->
             @if ($isPending)
                 <div class="formActionsPanel">
+                    <button class="rejectButton" type="submit" name="action" value="reject">却下</button>
                     <button class="submitUpdateButton" type="submit" name="action" value="approve">承認</button>
                 </div>
             @endif
         </form>
     </div>
 
-    <!-- 承認済みの詳細画面 -->
+    <!-- 承認済み・却下済みの詳細画面 -->
     @if (!$isPending)
         <div class="approvalPendingOutside">
-            <p class="approvalPendingMessage">承認済み</p>
+            <p class="approvalPendingMessage">{{ $requestData->status === 'approved' ? '承認済み' : '却下済み' }}</p>
         </div>
     @endif
 </div>

@@ -1,14 +1,13 @@
 /* Google Fonts読み込み */
-@import url('https://googleapis.com');
 
 /* 勤怠一覧画面全体 */
 #attendance-list-container {
     width: 100%;
-    background-color: #f0f0f5;;
+    background-color: var(--bg);
     min-height: calc(100vh - 70px);
     padding: 40px 0;
     box-sizing: border-box;
-    font-family: 'M PLUS 1p', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+    font-family: 'Zen Kaku Gothic New', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 
 /* タイトル*/
@@ -17,25 +16,22 @@
     max-width: 1000px;
     min-width: 800px;
     margin: 0 auto 30px auto;
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 900;
-    border-left: 8px solid #000000;
+    border-left: 8px solid var(--accent);
     padding-left: 12px;
     letter-spacing: 0.05em;
-    color: #000000;
+    color: var(--ink);
     box-sizing: border-box;
 }
 
-/*　月切替エリア */
+/* 月切替エリア(箱で囲まず、下線だけで区切る) */
 #month-selector {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #ffffff;
-    padding: 12px 60px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e5e5e5;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
     width: 70%;
     max-width: 900px;
     min-width: 800px;
@@ -53,14 +49,22 @@
 #month-selector .current-month-display {
     flex: 1;
     text-align: center;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 900;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    color: #000000;
+    color: var(--ink);
     padding-right: 0px;
+}
+
+/* カレンダーアイコン */
+.cal-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--accent);
+    flex-shrink: 0;
 }
 
 /* 翌月ボタン */
@@ -71,28 +75,25 @@
 
 /* 月切替ボタン */
 #month-selector .nav-btn {
-    color: #868a93;
-    font-size: 16px;
+    color: var(--muted);
+    font-size: 18px;
     font-weight: 800;
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 #month-selector .nav-btn:hover {
-    color: #4b5563;
+    color: var(--accent);
 }
 
-/* 勤怠一覧テーブル全体 */
+/* 勤怠一覧テーブル全体(箱で囲まず、線だけで区切るシンプルな表にする) */
 .table-wrapper {
     width: 70%;
     max-width: 900px;
     min-width: 800px;
     margin: 0 auto;
-    background-color: #ffffff;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    background-color: var(--surface);
+    border: 1px solid var(--line);
     box-sizing: border-box;
 }
 /* テーブル */
@@ -104,7 +105,7 @@
 
 .table-wrapper th,
 .table-wrapper td {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 800;
     padding: 12px 0;
     text-align: center;
@@ -113,14 +114,14 @@
 
 /* テーブル見出し */
 .table-wrapper th {
-    color: #868a93;
-    border-bottom: 2px solid #e5e5e5;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
 }
 
 /* テーブル内容 */
 .table-wrapper td {
-    border-bottom: 1px solid #e5e5e5;
-    color: #868a93;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
 }
 
 /* 日付 */
@@ -167,15 +168,12 @@
     border-bottom: none;
 }
 
-.table-wrapper tr:hover td {
-    background-color: #fafafa;
-}
 /* 詳細リンク */
 .table-wrapper .detail-link {
-    color: #000000;
+    color: var(--accent);
     font-weight: 900;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .table-wrapper .detail-link:hover {

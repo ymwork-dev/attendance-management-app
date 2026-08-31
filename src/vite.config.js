@@ -21,6 +21,7 @@ export default defineConfig({
                 'resources/css/admin_staff_attendance.css',
                 'resources/css/admin_request_list.css',
                 'resources/css/admin_request_approve.css',
+                'resources/css/stamp_correction_request_detail.css',
                 'resources/css/attendance.report.css',
                 'resources/js/app.js',
             ],

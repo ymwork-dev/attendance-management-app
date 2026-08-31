@@ -150,4 +150,77 @@ class T15_AdminAttendanceCorrectionTest extends TestCase
             'status' => 'approved',
         ]);
     }
+
+    #[Test]
+    public function 修正申請の却下処理が正しく行われる(): void
+    {
+        $admin = User::factory()->create(['admin_status' => true]);
+        $user = User::factory()->create();
+
+        // 元々09:00〜18:00で登録されている勤怠データ
+        $attendance = AttendanceRecord::factory()->create([
+            'user_id' => $user->id,
+            'clock_in' => '09:00:00',
+            'clock_out' => '18:00:00',
+        ]);
+
+        // 承認待ちの修正申請データを作成
+        $requestData = StampCorrectionRequest::create([
+            'attendance_record_id' => $attendance->id,
+            'user_id' => $user->id,
+            'requested_clock_in' => '10:00:00',
+            'requested_clock_out' => '19:00:00',
+            'comment' => '却下されるはずの申請',
+            'status' => 'pending',
+        ]);
+
+        // 管理者ログインして却下ボタンを押す
+        $response = $this->actingAs($admin)->post(route('admin.request.approve', ['attendance_correct_request_id' => $requestData->id]), [
+            'action' => 'reject'
+        ]);
+
+        $response->assertStatus(302);
+
+        // 申請のステータスが却下済みになっていることを検証
+        $this->assertDatabaseHas('stamp_correction_requests', [
+            'id' => $requestData->id,
+            'status' => 'rejected',
+        ]);
+
+        // 勤怠データ自体は変更されず、元の内容のままであることを検証
+        $this->assertDatabaseHas('attendance_records', [
+            'id' => $attendance->id,
+            'clock_in' => '09:00:00',
+            'clock_out' => '18:00:00',
+        ]);
+    }
+
+    #[Test]
+    public function 承認でも却下でもない操作を送るとエラーにならず元の画面に戻る(): void
+    {
+        $admin = User::factory()->create(['admin_status' => true]);
+        $user = User::factory()->create();
+        $attendance = AttendanceRecord::factory()->create(['user_id' => $user->id]);
+
+        $requestData = StampCorrectionRequest::create([
+            'attendance_record_id' => $attendance->id,
+            'user_id' => $user->id,
+            'status' => 'pending',
+            'comment' => 'テスト用申請',
+        ]);
+
+        // action が想定外の値の場合
+        $response = $this->actingAs($admin)->post(route('admin.request.approve', ['attendance_correct_request_id' => $requestData->id]), [
+            'action' => 'unknown'
+        ]);
+
+        // 500エラーにならず、リダイレクトになることを確認
+        $response->assertStatus(302);
+
+        // 申請のステータスは変わらず承認待ちのままであることを確認
+        $this->assertDatabaseHas('stamp_correction_requests', [
+            'id' => $requestData->id,
+            'status' => 'pending',
+        ]);
+    }
 }

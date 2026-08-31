@@ -16,14 +16,15 @@
                 @endif
             </h2>
 
-            <!-- 承認待ちと承認済みの切替 -->
+            <!-- 承認待ち・承認済み・却下済みの切替 -->
             <div class="tab-navigation">
-                <a href="?tab=pending" class="tab-item {{ request('tab') !== 'approved' ? 'is-active' : '' }}">承認待ち</a>
+                <a href="?tab=pending" class="tab-item {{ request('tab') !== 'approved' && request('tab') !== 'rejected' ? 'is-active' : '' }}">承認待ち</a>
                 <a href="?tab=approved" class="tab-item {{ request('tab') === 'approved' ? 'is-active' : '' }}">承認済み</a>
+                <a href="?tab=rejected" class="tab-item {{ request('tab') === 'rejected' ? 'is-active' : '' }}">却下済み</a>
             </div>
 
             <div class="table-wrapper">
-                @if(request('tab') !== 'approved')
+                @if(request('tab') !== 'approved' && request('tab') !== 'rejected')
                     @if($pendingRequests->isEmpty())
                         <p class="empty-message">承認待ちの申請はありません。</p>
                     @else
@@ -77,6 +78,39 @@
                                 @foreach($approvedRequests as $request)
                                     <tr>
                                         <td>承認済み</td>
+                                        <td>{{ $request->user->name ?? '' }}</td>
+                                        <td>{{ $request->attendanceRecord->date ?? '' }}</td>
+                                        <td>{{ $request->comment ?? '' }}</td>
+                                        <td>{{ $request->created_at ? $request->created_at->format('Y/m/d') : '' }}</td>
+                                        <td>
+                                            <a class="button-link" href="{{ route('admin.request.approve', ['attendance_correct_request_id' => $request->id]) }}">詳細</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @endif
+                @endif
+
+                @if(request('tab') === 'rejected')
+                    @if($rejectedRequests->isEmpty())
+                        <p class="empty-message">却下済みの申請はありません。</p>
+                    @else
+                        <table class="table-request">
+                            <thead>
+                                <tr>
+                                    <th scope="col">状態</th>
+                                    <th scope="col">名前</th>
+                                    <th scope="col">対象日時</th>
+                                    <th scope="col">申請理由</th>
+                                    <th scope="col">申請日時</th>
+                                    <th scope="col">詳細</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($rejectedRequests as $request)
+                                    <tr>
+                                        <td>却下済み</td>
                                         <td>{{ $request->user->name ?? '' }}</td>
                                         <td>{{ $request->attendanceRecord->date ?? '' }}</td>
                                         <td>{{ $request->comment ?? '' }}</td>

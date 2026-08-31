@@ -1,20 +1,19 @@
 /* Google Fonts読みこみ */
-@import url('https://googleapis.com');
 
 /* ページ全体 */
 body {
     margin: 0;
     padding: 0;
-    font-family: 'M PLUS 1p', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+    font-family: 'Zen Kaku Gothic New', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
     font-weight: 700;
-    color: #333333;
+    color: var(--ink);
 }
 
 /* 申請一覧画面全体 */
 .requestListMain {
     width: 100%;
     min-height: calc(100vh - 70px);
-    background-color: #f0f0f5;
+    background-color: var(--bg);
     box-sizing: border-box;
 }
 
@@ -33,7 +32,7 @@ body {
 
 /* タイトル */
 .page-title {
-    font-size: 26px;
+    font-size: 29px;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -46,7 +45,7 @@ body {
     display: inline-block;
     width: 8px;
     height: 28px;
-    background-color: #000000;
+    background-color: var(--accent);
     margin-right: 16px;
 }
 
@@ -54,43 +53,47 @@ body {
 .tab-navigation {
     display: flex;
     gap: 80px;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid var(--line);
     margin-bottom: 40px;
-    padding-bottom: 12px;
 }
 
-/* タブリンク */
+/* タブリンク(選択中のタブが分かるよう、文字の下に線を表示する土台を用意) */
 .tab-item {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
-    color: #888888;
+    color: var(--muted);
     text-decoration: none;
     cursor: pointer;
     user-select: none;
+    display: inline-block;
+    padding-bottom: 12px;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px; /* すぐ上の.tab-navigationの線と重ねて表示する */
 }
 
 /* 詳細待ちタブ選択時 */
 #tab-pending:checked ~ .tab-navigation .label-pending {
-    color: #000000;
+    color: var(--accent);
+    border-bottom-color: var(--accent);
 }
 
 /* 承認済みタブ選択時 */
 #tab-approved:checked ~ .tab-navigation .label-approved {
-    color: #000000;
+    color: var(--accent);
+    border-bottom-color: var(--accent);
 }
 
-/* アクティブなタブ */
+/* アクティブなタブ(選択中は、文字色を変えると同時に下線を表示する) */
 .tab-item.is-active {
-    color: #000000;
+    color: var(--accent);
+    border-bottom-color: var(--accent);
 }
 
-/* テーブル全体 */
+/* テーブル全体(箱で囲まず、線だけで区切るシンプルな表にする) */
 .table-wrapper {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
     padding: 0;
+    background-color: var(--surface);
+    border: 1px solid var(--line);
 }
 
 /* 申請一覧テーブル */
@@ -102,19 +105,19 @@ body {
 
 .table-request th,
 .table-request td {
-    font-size: 15px;
+    font-size: 17px;
     vertical-align: middle;
 }
 
 .table-request th {
-    color: #888888;
+    color: var(--muted);
     font-weight: 700;
-    border-bottom: 2px solid #f0f2f5;
+    border-bottom: 1px solid var(--line);
     padding: 12px 10px;
 }
 
 .table-request tbody td {
-    border-bottom: 2px solid #f0f2f5;
+    border-bottom: 1px solid var(--line);
     padding: 12px 10px;
 }
 
@@ -135,13 +138,13 @@ body {
 
 /* テーブル文字 */
 .table-request td {
-    color: #888888;
+    color: var(--ink);
     font-weight: 700;
 }
 
 /* 詳細リンク */
 .button-link {
-    color: #000000;
+    color: var(--accent);
     font-weight: bold;
     text-decoration: none;
 }
@@ -161,9 +164,9 @@ main.request-management .title-container {
 
 /* タイトル */
 main.request-management .page-title {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
-    color: #111827;
+    color: var(--ink);
     margin: 0;
     padding: 0;
     line-height: 1.2;
@@ -171,13 +174,13 @@ main.request-management .page-title {
 
 /* 成功メッセージ */
 main.request-management .success-message {
-    color: #16a34a;
-    font-size: 20px;
+    color: var(--success);
+    font-size: 22px;
     font-weight: bold;
     margin: 0;
     padding: 6px 16px;
-    background-color: #f0fdf4;
-    border: 1px solid #bbf7d0;
+    background-color: color-mix(in srgb, var(--success) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--success) 35%, transparent);
     border-radius: 20px;
     white-space: nowrap;
 }

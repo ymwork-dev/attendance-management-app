@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\AttendanceRecord;
 use App\Models\BreakLog;
+use App\Models\StampCorrectionRequest;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 // テスト機能の基本機能の呼び出し
@@ -107,5 +108,97 @@ class T10_AttendanceDetailTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('12:15');
         $response->assertSee('13:45');
+    }
+
+    #[Test]
+    public function 承認待ちの修正申請がある場合出退勤と休憩の入力欄が読み取り専用になる(): void
+    {
+        $user = User::factory()->create();
+
+        $record = AttendanceRecord::factory()->create([
+            'user_id'   => $user->id,
+            'date'      => '2026-06-11',
+            'clock_in'  => '2026-06-11 09:00:00',
+            'clock_out' => '2026-06-11 18:00:00',
+        ]);
+
+        // この勤怠データに対する、承認待ちの修正申請を作成
+        StampCorrectionRequest::create([
+            'user_id'              => $user->id,
+            'attendance_record_id' => $record->id,
+            'requested_clock_in'   => '09:00:00',
+            'requested_clock_out'  => '18:00:00',
+            'status'               => 'pending',
+            'comment'              => '承認待ちの申請',
+        ]);
+
+        $response = $this->actingAs($user)->get(route('attendance.detail', $record->id));
+
+        $response->assertStatus(200);
+
+        // 出退勤の入力欄が読み取り専用になっていることを確認
+        $response->assertSee('name="clock_in" class="inputTimeField" value="09:00" readonly', false);
+        $response->assertSee('name="clock_out" class="inputTimeField" value="18:00" readonly', false);
+    }
+
+    #[Test]
+    public function 却下された場合は申請中の表示に戻らず元の勤怠データが表示される(): void
+    {
+        $user = User::factory()->create();
+
+        $record = AttendanceRecord::factory()->create([
+            'user_id'   => $user->id,
+            'date'      => '2026-06-11',
+            'clock_in'  => '2026-06-11 09:00:00',
+            'clock_out' => '2026-06-11 18:00:00',
+        ]);
+
+        // 却下済みの修正申請(承認待ちではない)
+        StampCorrectionRequest::create([
+            'user_id'              => $user->id,
+            'attendance_record_id' => $record->id,
+            'requested_clock_in'   => '10:00:00',
+            'requested_clock_out'  => '19:00:00',
+            'status'               => 'rejected',
+            'comment'              => '却下された申請',
+        ]);
+
+        $response = $this->actingAs($user)->get(route('attendance.detail', $record->id));
+
+        $response->assertStatus(200);
+
+        // 却下された申請の内容ではなく、元の確定した勤怠データの時刻が入力欄に表示されることを確認
+        $response->assertSee('name="clock_in" class="inputTimeField" value="09:00"', false);
+        $response->assertSee('name="clock_out" class="inputTimeField" value="18:00"', false);
+
+        // 入力欄が readonly になっていない(申請中扱いになっていない)ことを確認
+        $response->assertDontSee('name="clock_in" class="inputTimeField" value="09:00" readonly', false);
+    }
+
+    #[Test]
+    public function 承認済みの申請がある場合は新しい備考欄に前回の内容が残らない(): void
+    {
+        $user = User::factory()->create();
+
+        $record = AttendanceRecord::factory()->create([
+            'user_id'   => $user->id,
+            'clock_in'  => '2026-06-11 09:00:00',
+            'clock_out' => '2026-06-11 18:00:00',
+        ]);
+
+        // 承認済みの修正申請(過去の申請の備考)
+        StampCorrectionRequest::create([
+            'user_id'              => $user->id,
+            'attendance_record_id' => $record->id,
+            'status'               => 'approved',
+            'comment'              => '過去に承認された申請の備考',
+        ]);
+
+        $response = $this->actingAs($user)->get(route('attendance.detail', $record->id));
+
+        $response->assertStatus(200);
+
+        // 過去の申請の備考が、新しい申請フォームの初期値として残っていないことを確認
+        $response->assertDontSee('過去に承認された申請の備考');
     }
 }

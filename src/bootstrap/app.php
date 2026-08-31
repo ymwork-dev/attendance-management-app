@@ -3,6 +3,10 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use App\Http\Middleware\EnsureUserIsAdmin;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Auth\AuthenticationException;
 
 // web/apiなどのルートファイルの読み込み設定
 return Application::configure(basePath: dirname(__DIR__))
@@ -14,12 +18,15 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     // アプリで使うリクエストチェックの設定
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // ルートで 'admin' という名前で呼び出せるように登録
+        $middleware->alias([
+            'admin' => EnsureUserIsAdmin::class,
+        ]);
     })
     //エラー処理の設定
     ->withExceptions(function (Exceptions $exceptions): void {
         // 権限エラーが出た時の処理
-        $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException $e, $request) {
+        $exceptions->render(function (AccessDeniedHttpException $e, $request) {
             // APIの場合だけ処理
             if ($request->is('api/*')) {
                 // JSONでエラーを返す
@@ -30,7 +37,7 @@ return Application::configure(basePath: dirname(__DIR__))
         });
 
         // データが見つからない時の処理
-        $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e, $request) {
+        $exceptions->render(function (NotFoundHttpException $e, $request) {
             // APIの場合だけ処理
             if ($request->is('api/*')) {
                 // JSONでエラーを返す
@@ -41,7 +48,7 @@ return Application::configure(basePath: dirname(__DIR__))
         });
 
         // 認証エラーが出た時の処理
-        $exceptions->render(function (\Illuminate\Auth\AuthenticationException $e, $request) {
+        $exceptions->render(function (AuthenticationException $e, $request) {
             // APIの場合だけ処理
             if ($request->is('api/*')) {
                 // JSONでエラーを返す

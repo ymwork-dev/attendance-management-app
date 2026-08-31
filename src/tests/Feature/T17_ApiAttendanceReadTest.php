@@ -77,6 +77,34 @@ class T17_ApiAttendanceReadTest extends TestCase
                 ],
             ]
         ]);
+
+        // 休憩が無い場合、実働時間は出退勤の差そのまま(9時〜18時なので09:00)、休憩時間は00:00になることを確認
+        $response->assertJsonPath('data.total_time', '09:00');
+        $response->assertJsonPath('data.total_break_time', '00:00');
+    }
+
+    #[Test]
+    public function 実働時間と休憩時間が休憩データを差し引いて計算される(): void
+    {
+        $user = User::factory()->create();
+
+        // 09:00〜18:00勤務、12:00〜13:00に1時間休憩
+        $record = AttendanceRecord::factory()->create([
+            'user_id' => $user->id,
+            'clock_in' => '09:00:00',
+            'clock_out' => '18:00:00',
+        ]);
+        $record->breaks()->create([
+            'break_in' => '12:00:00',
+            'break_out' => '13:00:00',
+        ]);
+
+        $response = $this->getJson("/api/v1/attendance-records/{$record->id}");
+
+        $response->assertStatus(200);
+        // 9時間勤務 - 1時間休憩 = 実働8時間
+        $response->assertJsonPath('data.total_time', '08:00');
+        $response->assertJsonPath('data.total_break_time', '01:00');
     }
 
     #[Test]

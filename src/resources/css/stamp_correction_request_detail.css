@@ -1,6 +1,6 @@
 /* Google Fonts読み込み */
 
-/* 修正申請承認画面全体 */
+/* 申請詳細画面全体 */
 .attendanceDetailMain {
     width: 100%;
     font-family: 'Zen Kaku Gothic New', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif; /* 使用するFontsを指定 */
@@ -37,7 +37,7 @@
     margin-right: 15px;
 }
 
-/* 修正申請テーブル(箱で囲まず、線だけで区切るシンプルな表にする) */
+/* 申請内容テーブル(箱で囲まず、線だけで区切るシンプルな表にする) */
 .attendanceTable {
     width: 100%;
     background-color: var(--surface);
@@ -99,7 +99,7 @@
     gap: 80px;
 }
 
-/* 時刻入力欄 */
+/* 時刻入力欄(読み取り専用) */
 .inputTimeField {
     border: none;
     font-size: 17px;
@@ -129,7 +129,7 @@
     font-size: 17px;
 }
 
-/* 備考入力欄 */
+/* 備考欄(読み取り専用) */
 .textareaRemarksField {
     width: 100%;
     border: none;
@@ -148,39 +148,7 @@
     outline: none;
 }
 
-/* ボタンエリア */
-.formActionsPanel {
-    display: flex;
-    justify-content: flex-end;
-    gap: 16px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.submitUpdateButton {
-    background-color: var(--accent);
-    color: var(--accent-contrast);
-    font-size: 17px;
-    font-weight: 700;
-    padding: 12px 48px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-/* 却下ボタン(承認ボタンと区別するため、白背景+枠線にする) */
-.rejectButton {
-    background-color: var(--surface);
-    color: var(--ink);
-    font-size: 17px;
-    font-weight: 700;
-    padding: 12px 48px;
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-/* 承認待ちメッセージエリア */
+/* 状態(承認待ち・承認済み・却下済み)メッセージエリア */
 .approvalPendingOutside {
     display: flex;
     justify-content: flex-end;

@@ -43,9 +43,9 @@
                                 <td>
                                     <div class="timeRangeGroup">
                                         <!-- 出退勤時刻の修正申請入力欄 承認待ち申請詳細は修正不可-->
-                                        <input type="time" name="clock_in" class="inputTimeField" value="{{ old('clock_in', $record->clock_in ? \Carbon\Carbon::parse($record->clock_in)->format('H:i') : '') }}" {{ optional($record->stampCorrectionRequest)->status === 'pending' ? 'readonly' : '' }}>
+                                        <input type="time" name="clock_in" class="inputTimeField" value="{{ old('clock_in', $record->clock_in ? \Carbon\Carbon::parse($record->clock_in)->format('H:i') : '') }}" {{ $isPending ? 'readonly' : '' }}>
                                         <span class="timeSeparator">〜</span>
-                                        <input type="time" name="clock_out" class="inputTimeField" value="{{ old('clock_out', $record->clock_out ? \Carbon\Carbon::parse($record->clock_out)->format('H:i') : '') }}" {{ optional($record->stampCorrectionRequest)->status === 'pending' ? 'readonly' : '' }}>
+                                        <input type="time" name="clock_out" class="inputTimeField" value="{{ old('clock_out', $record->clock_out ? \Carbon\Carbon::parse($record->clock_out)->format('H:i') : '') }}" {{ $isPending ? 'readonly' : '' }}>
                                     </div>
                                     @if ($errors->has('clock_in') || $errors->has('clock_out'))
                                         <p class="inputErrorMessage">
@@ -70,7 +70,7 @@
                                                 name="breaks[{{ $break->id }}][break_in]"
                                                 class="inputTimeField"
                                                 value="{{ old('breaks.' . $break->id . '.break_in', $break->break_in ? \Carbon\Carbon::parse($break->break_in)->format('H:i') : '') }}"
-                                                {{ optional($record->stampCorrectionRequest)->status === 'pending' ? 'readonly' : '' }}
+                                                {{ $isPending ? 'readonly' : '' }}
                                             >
 
                                             <span class="timeSeparator">〜</span>
@@ -81,7 +81,7 @@
                                                 name="breaks[{{ $break->id }}][break_out]"
                                                 class="inputTimeField"
                                                 value="{{ old('breaks.' . $break->id . '.break_out', $break->break_out ? \Carbon\Carbon::parse($break->break_out)->format('H:i') : '') }}"
-                                                {{ optional($record->stampCorrectionRequest)->status === 'pending' ? 'readonly' : '' }}
+                                                {{ $isPending ? 'readonly' : '' }}
                                             >
                                         </div>
 
@@ -128,7 +128,7 @@
                                         name="comment"
                                         class="textareaRemarksField"
                                         {{ $isPending ? 'disabled' : '' }}
-                                    >{{ old('comment', $correctionRequest->comment ?? '') }}</textarea>
+                                    >{{ old('comment', ($isPending && $correctionRequest) ? $correctionRequest->comment : '') }}</textarea>
 
                                     @error('comment')
                                         <p class="inputErrorMessage">{{ $message }}</p>
