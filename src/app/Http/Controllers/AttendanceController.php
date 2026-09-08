@@ -187,46 +187,13 @@ class AttendanceController extends Controller
         // ユーザーが指定した年月の翌月情報を取得
         $nextMonth = $currentMonth->copy()->addMonth()->format('Y-m');
 
-        // 勤怠登録データーを取得し1件ずつ追加(休憩データも一緒に取得N+1問題防止)
+        // 勤怠登録データーを取得(休憩データも一緒に取得N+1問題防止)
+        // 休憩時間・勤務時間は AttendanceRecord モデルの total_break_time / total_time アクセサで計算する
         $attendances = AttendanceRecord::with('breaks')
             ->where('user_id', $user->id)
             ->whereYear('date', $currentMonth->year)
             ->whereMonth('date', $currentMonth->month)
             ->get()
-            ->map(function (AttendanceRecord $record): AttendanceRecord {
-
-            // 承認されるまでは元の確定データのみを使って計算する
-                $record->clock_in = $record->clock_in;
-                $record->clock_out = $record->clock_out;
-
-                // 休憩時間を秒で集計
-                $totalBreakSeconds = $record->breaks->sum(function (BreakLog $break): int {
-                    if (!$break->break_in || !$break->break_out) return 0;
-                    return Carbon::parse($break->break_in)->diffInSeconds(Carbon::parse($break->break_out));
-                });
-
-                // 休憩時間を表示形式へ変換
-                $breakHours = floor($totalBreakSeconds / 3600);
-                $breakMinutes = floor(($totalBreakSeconds % 3600) / 60);
-                $record->display_break_time = $totalBreakSeconds > 0 ? sprintf('%02d:%02d', $breakHours, $breakMinutes) : '00:00';
-
-                // 勤務時間を計算(退勤時間-出勤時間-休憩時間）
-                $record->display_work_time = '';
-                if ($record->clock_in && $record->clock_out) {
-                    $start = Carbon::parse($record->clock_in);
-                    $end = Carbon::parse($record->clock_out);
-                    $totalWorkSeconds = $start->diffInSeconds($end) - $totalBreakSeconds;
-
-                    if ($totalWorkSeconds < 0) { $totalWorkSeconds = 0; }
-
-                    // 勤務時間を表示形式へ変換
-                    $workHours = floor($totalWorkSeconds / 3600);
-                    $workMinutes = floor(($totalWorkSeconds % 3600) / 60);
-                    $record->display_work_time = sprintf('%02d:%02d', $workHours, $workMinutes);
-                }
-
-                return $record;
-            })
             // 日付けをキーにして扱いやすく変換
             ->keyBy('date');
 

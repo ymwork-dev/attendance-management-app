@@ -56,6 +56,13 @@
             <button type="submit" class="btn">ログイン</button>
         </form>
 
+        <!-- 動作確認用のデモ用アカウント情報 -->
+        <div class="demo-account">
+            <p class="demo-account-title">デモ用アカウント</p>
+            <p>メールアドレス: demo@example.com</p>
+            <p>パスワード: demo1234</p>
+        </div>
+
         <!-- 会員登録画面へ遷移リンク -->
         <p><a href="/register" class="login-link">会員登録はこちら</a></p>
     </div>

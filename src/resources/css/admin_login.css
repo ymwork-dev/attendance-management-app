@@ -15,7 +15,7 @@
     display: block;
     width: 100%;
     max-width: 550px;
-    margin: 120px auto 0;
+    margin: 60px auto 0;
     padding: 0 20px;
     background-color: transparent;
 }
@@ -80,4 +80,25 @@
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
+}
+
+/* 動作確認用のデモ用アカウント情報 */
+.demo-account {
+    margin-top: 30px;
+    padding: 16px 20px;
+    background-color: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+}
+
+.demo-account p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.demo-account p.demo-account-title {
+    font-weight: bold;
+    color: var(--ink);
+    margin-bottom: 6px;
 }

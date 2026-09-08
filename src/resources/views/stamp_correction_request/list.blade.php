@@ -75,16 +75,13 @@
                     @endif
                 @endif
 
-                <!-- 承認済みタブ選択時、またはテスト実行時に表示 -->
-                @if(request('tab') === 'approved' || app()->runningUnitTests())
+                <!-- 承認済みタブ選択時に表示 -->
+                @if(request('tab') === 'approved')
                     <!-- 承認済みデータが空の場合 -->
                     @if($approvedRequests->isEmpty())
-                        @if(request('tab') === 'approved')
-                            <p class="empty-message">承認済みの申請はありません。</p>
-                        @endif
+                        <p class="empty-message">承認済みの申請はありません。</p>
                     @else
-                        <!-- 承認済みタブ以外かつテスト実行時は非表示 -->
-                        <table class="table-request" style="{{ request('tab') !== 'approved' && app()->runningUnitTests() ? 'display: none;' : '' }}">
+                        <table class="table-request">
                             <thead>
                                 <tr>
                                     <th scope="col">状態</th>

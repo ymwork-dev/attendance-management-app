@@ -24,28 +24,28 @@ class AttendanceSeeder extends Seeder
      */
     public function run(): void
     {
-        // スタッフユーザー1、メールアドレス、パスワードの暗号化、メール認証日時は現在時刻(認証済み)
+        // スタッフユーザー1(従業員1)、メールアドレス、パスワードの暗号化、メール認証日時は現在時刻(認証済み)
         $user1 = User::create([
-            'name' => 'ユーザー1',
-            'email' => 'user1@example.com',
-            'password' => Hash::make('password'),
+            'name' => '従業員1',
+            'email' => 'demo@example.com',
+            'password' => Hash::make('demo1234'),
             'email_verified_at' => now(),
             'admin_status' => false, // 一般ユーザー
         ]);
 
-        // スタッフユーザー2、メールアドレス、パスワードの暗号化、メール認証日時は現在時刻(認証済み)
+        // スタッフユーザー2(従業員2)、メールアドレス、パスワードの暗号化、メール認証日時は現在時刻(認証済み)
         $user2 = User::create([
-            'name' => 'ユーザー2',
-            'email' => 'user2@example.com',
-            'password' => Hash::make('password'),
+            'name' => '従業員2',
+            'email' => 'demo2@example.com',
+            'password' => Hash::make('demo1234'),
             'email_verified_at' => now(),
             'admin_status' => false, // 一般ユーザー
         ]);
 
-        // 管理者ユーザー3、メールアドレス、パスワードの暗号化、メール認証日時は現在時刻
+        // 管理者ユーザー、メールアドレス、パスワードの暗号化、メール認証日時は現在時刻
         $user3 = User::create([
-            'name' => 'ユーザー3(管理者)',
-            'email' => 'user3@example.com',
+            'name' => '管理者',
+            'email' => 'test@example.com',
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
             'admin_status' => true, // 管理者ユーザー権限

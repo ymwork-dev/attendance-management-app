@@ -98,3 +98,25 @@ body .login-box .btn:hover {
 .login-box p a:hover {
     text-decoration: underline;
 }
+
+/* 動作確認用のデモ用アカウント情報 */
+.login-box .demo-account {
+    margin-top: 30px;
+    padding: 16px 20px;
+    background-color: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+}
+
+.login-box .demo-account p {
+    margin: 0;
+    text-align: left;
+    font-size: 0.85em;
+    color: var(--muted);
+}
+
+.login-box .demo-account p.demo-account-title {
+    font-weight: bold;
+    color: var(--ink);
+    margin-bottom: 6px;
+}

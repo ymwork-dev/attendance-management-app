@@ -39,6 +39,13 @@
 
             <button class="form-button" type="submit">管理者ログインする</button>
         </form>
+
+        <!-- 動作確認用のデモ用アカウント情報 -->
+        <div class="demo-account">
+            <p class="demo-account-title">デモ用アカウント</p>
+            <p>メールアドレス: test@example.com</p>
+            <p>パスワード: password</p>
+        </div>
     </div>
 </div>
 @endsection

@@ -190,8 +190,8 @@ class T11_AttendanceUpdateTest extends TestCase
             'comment' => '承認済み備考表示確認',
         ]);
 
-        // 申請一覧画面へアクセス(管理者・ユーザー共通)
-        $response = $this->actingAs($user)->get(route('attendance_correction_request.index'));
+        // 申請一覧画面の承認済みタブへアクセス(管理者・ユーザー共通)
+        $response = $this->actingAs($user)->get(route('attendance_correction_request.index', ['tab' => 'approved']));
 
         // 正常に表示し、承認済みに管理者が承認した修正申請が表示されることを確認
         $response->assertStatus(200);

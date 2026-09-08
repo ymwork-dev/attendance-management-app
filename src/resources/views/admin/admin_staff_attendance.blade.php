@@ -49,16 +49,15 @@
                     @php
                         $dateStr = $day->format('Y-m-d');
                         $record = $attendances->get($dateStr);
-                        $wago = ['日', '月', '火', '水', '木', '金', '土'];
-                        $dayOfWeek = $wago[$day->dayOfWeek];
                     @endphp
                     <tr>
                         <!-- 出勤・退勤・休憩・労働時間を表示-->
-                        <td>{{ $day->format('m/d') }}({{ $dayOfWeek }})</td>
-                        <td>{{ $record && $record->display_clock_in ? \Carbon\Carbon::parse($record->display_clock_in)->format('H:i') : '' }}</td>
-                        <td>{{ $record && $record->display_clock_out ? \Carbon\Carbon::parse($record->display_clock_out)->format('H:i') : '' }}</td>
-                        <td>{{ $record ? $record->display_break_time : '' }}</td>
-                        <td>{{ $record ? $record->display_work_time : '' }}</td>
+                        <!-- isoFormat('dd') はアプリの言語設定(日本語)に合わせて曜日を1文字で返してくれる -->
+                        <td>{{ $day->format('m/d') }}({{ $day->isoFormat('dd') }})</td>
+                        <td>{{ $record && $record->clock_in ? \Carbon\Carbon::parse($record->clock_in)->format('H:i') : '' }}</td>
+                        <td>{{ $record && $record->clock_out ? \Carbon\Carbon::parse($record->clock_out)->format('H:i') : '' }}</td>
+                        <td>{{ $record ? $record->total_break_time : '' }}</td>
+                        <td>{{ $record ? $record->total_time : '' }}</td>
                         <td>
                             @if($record)
                                 <a href="{{ route('admin.attendance.detail', ['id' => $record->id]) }}" class="detail-link">詳細</a>

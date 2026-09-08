@@ -183,6 +183,7 @@ class AdminAttendanceController extends Controller
         $nextMonth = $currentMonth->copy()->addMonth()->format('Y-m');
 
         // 勤怠データと一緒に休憩データを取得
+        // 休憩時間・勤務時間は AttendanceRecord モデルの total_break_time / total_time アクセサで計算する
         $attendances = AttendanceRecord::with('breaks')
             // 指定したスタッフIDのデータを検索
             ->where('user_id', $targetUser->id)
@@ -190,45 +191,6 @@ class AdminAttendanceController extends Controller
             ->whereYear('date', $currentMonth->year)
             ->whereMonth('date', $currentMonth->month)
             ->get()
-
-            // 一覧表示用の出勤時刻と退勤時刻を追加
-            ->map(function (AttendanceRecord $record): AttendanceRecord {
-                $record->display_clock_in = $record->clock_in;
-                $record->display_clock_out = $record->clock_out;
-
-                // 休憩時刻の合計(秒)を計算
-                $totalBreakSeconds = $record->breaks->sum(function ($b): int {
-                    // もし休憩開始および休憩終了時刻が空の場合、0秒を返す
-                    if (!$b->break_in || !$b->break_out) return 0;
-                    // 休憩開始と休憩終了の差(秒)から休憩時刻を計算
-                    return Carbon::parse($b->break_in)->diffInSeconds(Carbon::parse($b->break_out));
-                });
-
-                // 表示用に休憩時間を時分形式へ変換
-                $breakHours = floor($totalBreakSeconds / 3600);
-                // 3600秒を60分に計算
-                $breakMinutes = floor(($totalBreakSeconds % 3600) / 60);
-                // 一覧表示用の休憩時間を追加し、休憩時間が無い場合は 00:00 を表示
-                $record->display_break_time = $totalBreakSeconds > 0 ? sprintf('%02d:%02d', $breakHours, $breakMinutes) : '00:00';
-
-                // 出勤時刻から退勤時刻までの時間－休憩時間で勤務時間(秒)を計算
-                $record->display_work_time = '';
-                if ($record->clock_in && $record->clock_out) {
-                    $start = Carbon::parse($record->clock_in);
-                    $end = Carbon::parse($record->clock_out);
-                    $totalWorkSeconds = $start->diffInSeconds($end) - $totalBreakSeconds;
-
-                // 勤務時間がマイナスにならないよう補正(0秒)
-                if ($totalWorkSeconds < 0) { $totalWorkSeconds = 0; }
-                    // 時分形式に変換し、勤務時間を計算
-                    $workHours = floor($totalWorkSeconds / 3600);
-                    $workMinutes = floor(($totalWorkSeconds % 3600) / 60);
-                    $record->display_work_time = sprintf('%02d:%02d', $workHours, $workMinutes);
-                }
-
-            // データを追加した勤怠データを返す
-            return $record;
-            })
 
             // 日付をキーにしてデータを扱いやすくする
             ->keyBy('date');

@@ -80,16 +80,16 @@ erDiagram
 *全てメール認証済み
 
 ### 一般ユーザー
-- **ユーザー1**
-  - メールアドレス: `user1@example.com`
-  - パスワード: `password`
-- **ユーザー2**
-  - メールアドレス: `user2@example.com`
-  - パスワード: `password`
+- **従業員1**
+  - メールアドレス: `demo@example.com`
+  - パスワード: `demo1234`
+- **従業員2**
+  - メールアドレス: `demo2@example.com`
+  - パスワード: `demo1234`
 
 ### 管理者ユーザー
-- **ユーザー3（admin_status=true）**
-  - メールアドレス: `user3@example.com`
+- **管理者（admin_status=true）**
+  - メールアドレス: `test@example.com`
   - パスワード: `password`
 
 

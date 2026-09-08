@@ -45,22 +45,19 @@
                 <!-- コントローラーで用意した１日から月末を1日ずつ持ってきてループ処理をする -->
                 <!-- データーを年月日形式にして変数(箱)にしまう -->
                 <!--1日ずつ打刻データがあるか探し変数(箱)にしまう  -->
-                <!-- 日本語の曜日を用意して変数(箱)にしまう -->
-                <!-- 日付に合った正しい曜日を用意して変数(箱)にしまう -->
                 @foreach($daysInMonth as $day)
                     @php
                         $dateStr = $day->format('Y-m-d');
                         $record = $attendances->get($dateStr);
-                        $wago = ['日', '月', '火', '水', '木', '金', '土'];
-                        $dayOfWeek = $wago[$day->dayOfWeek];
                     @endphp
                     <tr>
                         <!-- 月/日と(曜日)、出勤時刻、退勤時刻、休憩時間、勤務合計時間 を表示 -->
-                        <td>{{ $day->format('m/d') }}({{ $dayOfWeek }})</td>
+                        <!-- isoFormat('dd') はアプリの言語設定(日本語)に合わせて曜日を1文字で返してくれる -->
+                        <td>{{ $day->format('m/d') }}({{ $day->isoFormat('dd') }})</td>
                         <td>{{ $record && $record->clock_in ? \Carbon\Carbon::parse($record->clock_in)->format('H:i') : '' }}</td>
                         <td>{{ $record && $record->clock_out ? \Carbon\Carbon::parse($record->clock_out)->format('H:i') : '' }}</td>
-                        <td>{{ $record ? $record->display_break_time : '' }}</td>
-                        <td>{{ $record ? $record->display_work_time : '' }}</td>
+                        <td>{{ $record ? $record->total_break_time : '' }}</td>
+                        <td>{{ $record ? $record->total_time : '' }}</td>
                         <td>
                             <!-- もし詳細リンクをクリックしたら、勤怠詳細画面を表示する -->
                             @if($record)
