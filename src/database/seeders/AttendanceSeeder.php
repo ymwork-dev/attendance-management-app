@@ -54,6 +54,9 @@ class AttendanceSeeder extends Seeder
         // 今現在の日時を取得して変数(箱)へしまう
         $now = Carbon::now();
 
+        // 当日以降は打刻デモができるよう、当月のシードは「前日まで」に留めるための基準日
+        $today = (clone $now)->startOfDay();
+
         // 当月の特殊パターンデータ作成
         $patterns = [
             ...array_fill(0, 10, ['09:00:00', '18:00:00']), // 通常 10日
@@ -90,13 +93,15 @@ class AttendanceSeeder extends Seeder
         // 1日からスタートするよう設定
         $currentMonthDate1 = (clone $now)->startOfMonth();
         // 出勤パターンを1つずつ取り出し、今月の平日のみに勤怠データを割り当てる
-        collect($patterns)->each(function (array $pattern) use (&$currentMonthDate1, $user1) {
+        collect($patterns)->each(function (array $pattern) use (&$currentMonthDate1, $user1, $today) {
              // 週末である限り、日付を先に進めるループ処理を開始
             while ($currentMonthDate1->isWeekend()) {
                 $currentMonthDate1->addDay();
             }
-            // 平日の日付でデータベースに勤怠レコードを1件作成
-            $this->createRecord($user1->id, $currentMonthDate1, $pattern[0], $pattern[1]);
+            // 平日かつ本日より前の日付だけレコードを作成(本日以降は打刻デモ用に空けておく)
+            if ($currentMonthDate1->lt($today)) {
+                $this->createRecord($user1->id, $currentMonthDate1, $pattern[0], $pattern[1]);
+            }
             // 次へ進むために、日付をさらに1日分進める
             $currentMonthDate1->addDay();
         });
@@ -116,11 +121,13 @@ class AttendanceSeeder extends Seeder
         });
 
         $currentMonthDate2 = (clone $now)->startOfMonth();
-        collect($patterns)->each(function (array $pattern) use (&$currentMonthDate2, $user2) {
+        collect($patterns)->each(function (array $pattern) use (&$currentMonthDate2, $user2, $today) {
             while ($currentMonthDate2->isWeekend()) {
                 $currentMonthDate2->addDay();
             }
-            $this->createRecord($user2->id, $currentMonthDate2, $pattern[0], $pattern[1]);
+            if ($currentMonthDate2->lt($today)) {
+                $this->createRecord($user2->id, $currentMonthDate2, $pattern[0], $pattern[1]);
+            }
             $currentMonthDate2->addDay();
         });
 
@@ -139,12 +146,13 @@ class AttendanceSeeder extends Seeder
         });
 
         $currentMonthDate3 = (clone $now)->startOfMonth();
-        collect($patterns)->each(function (array $pattern) use (&$currentMonthDate3, $user3) {
+        collect($patterns)->each(function (array $pattern) use (&$currentMonthDate3, $user3, $today) {
             while ($currentMonthDate3->isWeekend()) {
                 $currentMonthDate3->addDay();
             }
-            // ★完全復元
-            $this->createRecord($user3->id, $currentMonthDate3, $pattern[0], $pattern[1]);
+            if ($currentMonthDate3->lt($today)) {
+                $this->createRecord($user3->id, $currentMonthDate3, $pattern[0], $pattern[1]);
+            }
             $currentMonthDate3->addDay();
         });
     }

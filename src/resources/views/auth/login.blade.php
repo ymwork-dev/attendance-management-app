@@ -56,14 +56,19 @@
             <button type="submit" class="btn">ログイン</button>
         </form>
 
-        <!-- 動作確認用のデモ用アカウント情報 -->
-        <div class="demo-account">
-            <p class="demo-account-title">デモ用アカウント</p>
-            <p>メールアドレス: demo@example.com</p>
-            <p>パスワード: demo1234</p>
-        </div>
-
         <!-- 会員登録画面へ遷移リンク -->
         <p><a href="/register" class="login-link">会員登録はこちら</a></p>
+
+        <!-- かんたんログイン: デモアカウントにワンクリックでログイン -->
+        <div class="demo-login">
+            <p class="demo-login-note">会員登録なしで動作確認していただけます</p>
+            @if (session('demo_login_failed'))
+                <div class="error-message">{{ session('demo_login_failed') }}</div>
+            @endif
+            <form action="{{ route('demo.login', 'employee') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn-demo">デモ用従業員としてログイン</button>
+            </form>
+        </div>
     </div>
 @endsection

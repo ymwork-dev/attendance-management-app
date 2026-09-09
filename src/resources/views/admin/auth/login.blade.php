@@ -40,11 +40,16 @@
             <button class="form-button" type="submit">管理者ログインする</button>
         </form>
 
-        <!-- 動作確認用のデモ用アカウント情報 -->
-        <div class="demo-account">
-            <p class="demo-account-title">デモ用アカウント</p>
-            <p>メールアドレス: test@example.com</p>
-            <p>パスワード: password</p>
+        <!-- かんたんログイン: デモアカウントにワンクリックでログイン -->
+        <div class="demo-login">
+            <p class="demo-login-note">会員登録なしで動作確認していただけます</p>
+            @if (session('demo_login_failed'))
+                <div class="error-message">{{ session('demo_login_failed') }}</div>
+            @endif
+            <form action="{{ route('demo.login', 'admin') }}" method="POST">
+                @csrf
+                <button type="submit" class="form-button--demo">デモ用管理者としてログイン</button>
+            </form>
         </div>
     </div>
 </div>
