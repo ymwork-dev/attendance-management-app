@@ -33,9 +33,9 @@
                     </li>
                     <li class="header__nav-item">
                         <!-- 安全にログアウトを実行するためのフォーム -->
-                        <form action="{{ route('admin.logout') }}" method="POST" style="display: inline;">
+                        <form action="{{ route('admin.logout') }}" method="POST" class="header__logout-form">
                             @csrf
-                            <button class="header__nav-link" type="submit" style="background: none; border: none; font-family: inherit;">ログアウト</button>
+                            <button class="header__nav-link header__logout-button" type="submit">ログアウト</button>
                         </form>
                     </li>
                 </ul>

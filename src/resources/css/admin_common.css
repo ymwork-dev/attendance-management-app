@@ -84,6 +84,18 @@ body {
     color: var(--accent);
 }
 
+/* ログアウトフォーム(ナビ項目内にインライン配置) */
+.header__logout-form {
+    display: inline;
+}
+
+/* submitボタンを他のナビリンクと同じ見た目にするためのリセット */
+.header__logout-button {
+    background: none;
+    border: none;
+    font-family: inherit;
+}
+
 /* メイン画面 */
 .main-content {
     display: block;

@@ -44,7 +44,7 @@
     <!-- ログインユーザー用のヘッダーに表示 -->
     @auth
     <!-- ログアウト用の隠しフォーム -->
-    <form id="logout-form" action="/logout" method="POST" style="display: none;">
+    <form id="logout-form" class="logout-form" action="/logout" method="POST">
         <!-- cookie自動送信を悪用した攻撃を防ぐための@csrf(セキュリティトークン) -->
         @csrf
     </form>

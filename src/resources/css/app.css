@@ -72,6 +72,11 @@ html body .nav a:hover {
     color: var(--accent);
 }
 
+/* ログアウト用の隠しフォーム(JSから送信するので非表示) */
+.logout-form {
+    display: none;
+}
+
 /* ヘッダー全体レイアウト */
 .header-container {
     display: flex;
