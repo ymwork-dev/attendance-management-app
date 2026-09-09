@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class DemoLoginController extends Controller
 {
     /**
-     * かんたんログイン用の固定デモアカウント(役割 => メールアドレス)
+     * デモ用ログイン用の固定デモアカウント(役割 => メールアドレス)
      *
      * @var array<string, string>
      */

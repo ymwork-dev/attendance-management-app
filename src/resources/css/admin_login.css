@@ -82,7 +82,7 @@
     cursor: pointer;
 }
 
-/* かんたんログイン(デモアカウント) */
+/* デモ用ログイン */
 .demo-login {
     margin-top: 56px;
 }
@@ -94,7 +94,7 @@
     color: var(--muted);
 }
 
-/* かんたんログインボタン(副次アクションなので枠線のみのスタイル) */
+/* デモ用ログインボタン(副次アクションなので枠線のみのスタイル) */
 .form-button--demo {
     display: block;
     width: 100%;

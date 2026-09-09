@@ -4,7 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AttendanceController;
-// かんたんログイン(デモアカウント)用コントローラーの読み込み
+// デモ用ログイン用コントローラーの読み込み
 use App\Http\Controllers\DemoLoginController;
 // 勤怠修正申請データを操作するコントローラーの読み込み
 use App\Http\Controllers\StampCorrectionRequestController;
@@ -44,7 +44,7 @@ Route::post('/email/bypass', function () {
     return redirect()->route('attendance.index');
 })->middleware('auth')->name('email.bypass');
 
-// かんたんログイン: 固定のデモアカウントにワンクリックでログインする(役割ごと)
+// デモ用ログイン: 固定のデモアカウントにワンクリックでログインする(役割ごと)
 // 役割は employee / admin のみ許可(それ以外は404)
 Route::post('/demo-login/{role}', [DemoLoginController::class, 'store'])
     ->whereIn('role', ['employee', 'admin'])

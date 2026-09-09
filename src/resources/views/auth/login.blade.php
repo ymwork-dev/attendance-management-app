@@ -59,7 +59,7 @@
         <!-- 会員登録画面へ遷移リンク -->
         <p><a href="/register" class="login-link">会員登録はこちら</a></p>
 
-        <!-- かんたんログイン: デモアカウントにワンクリックでログイン -->
+        <!-- デモ用ログイン: デモアカウントにワンクリックでログイン -->
         <div class="demo-login">
             <p class="demo-login-note">会員登録なしで動作確認していただけます</p>
             @if (session('demo_login_failed'))

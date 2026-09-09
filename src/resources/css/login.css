@@ -99,7 +99,7 @@ body .login-box .btn:hover {
     text-decoration: underline;
 }
 
-/* かんたんログイン(デモアカウント) */
+/* デモ用ログイン */
 .login-box .demo-login {
     margin-top: 56px;
 }
@@ -111,7 +111,7 @@ body .login-box .btn:hover {
     color: var(--muted);
 }
 
-/* かんたんログインボタン(副次アクションなので枠線のみのスタイル) */
+/* デモ用ログインボタン(副次アクションなので枠線のみのスタイル) */
 body .login-box .btn-demo {
     width: 100%;
     background-color: var(--surface);

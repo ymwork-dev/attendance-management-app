@@ -40,7 +40,7 @@
             <button class="form-button" type="submit">管理者ログインする</button>
         </form>
 
-        <!-- かんたんログイン: デモアカウントにワンクリックでログイン -->
+        <!-- デモ用ログイン: デモアカウントにワンクリックでログイン -->
         <div class="demo-login">
             <p class="demo-login-note">会員登録なしで動作確認していただけます</p>
             @if (session('demo_login_failed'))
