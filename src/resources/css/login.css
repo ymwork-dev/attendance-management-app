@@ -99,9 +99,11 @@ body .login-box .btn:hover {
     text-decoration: underline;
 }
 
-/* デモ用ログイン */
+/* デモ用ログイン: 案内テキストとボタンの幅を揃えるため、幅がテキスト側の内容に合わせて決まる縦並びflexにする */
 .login-box .demo-login {
-    margin-top: 56px;
+    display: inline-flex;
+    flex-direction: column;
+    margin: 56px auto 0;
 }
 
 .login-box .demo-login-note {
