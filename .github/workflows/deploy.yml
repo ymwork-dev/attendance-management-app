@@ -40,3 +40,4 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           source: "src/public/build"
           target: "/home/ubuntu/attendance-management-app"
+          overwrite: true
