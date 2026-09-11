@@ -82,9 +82,12 @@
     cursor: pointer;
 }
 
-/* デモ用ログイン */
+/* デモ用ログイン: 案内テキストとボタンの幅を揃えるため、幅がテキスト側の内容に合わせて決まる縦並びflexにする */
 .demo-login {
-    margin-top: 56px;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: 56px auto 0;
 }
 
 .demo-login-note {
